@@ -1,0 +1,24 @@
+<!--- View -->
+<form nz-form [formGroup]="linkForm" >
+	<nz-form-item class="navItem">
+		<nz-form-label [nzSpan]="6">链接到</nz-form-label>
+		<nz-form-control [nzSpan]="18" class="navItem">
+			<nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton" [nzAddOnBefore]="setLinkType()">
+				<input nz-input placeholder="链接地址" formControlName="linkName"
+					 *ngIf="linkForm.get('linkType').value !==6" [disabled]="true" (ngModelChange)="formFieldValueChange()"/>
+				<input nz-input placeholder="链接地址" formControlName="link"
+				*ngIf="linkForm.get('linkType').value ===6" (ngModelChange)="formFieldValueChange()"/>
+			</nz-input-group>
+			<ng-template #suffixIconButton>
+				<button nz-button nzType="primary" nzSearch
+					 class="form-btn" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">修改</button>
+					 <nz-dropdown-menu #menu="nzDropdownMenu">
+						<ul nz-menu>
+						  <li nz-menu-item *ngFor="let menu of menuList" (click)="checkLinkType(menu)">{{menu.name}}</li>
+						</ul>
+					  </nz-dropdown-menu>
+			</ng-template>
+		</nz-form-control>
+	</nz-form-item>
+</form>
+<!--- View end -->

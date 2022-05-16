@@ -1,0 +1,11 @@
+<header class="HeaderWrap">
+	<nz-breadcrumb>
+		<ng-container *ngFor="let itme of title">
+			<nz-breadcrumb-item  *ngIf="itme">
+				<span  [ngClass]="{'Link': itme.link, 'Text': !itme.link}" (click)="link(itme)">{{itme.name}}</span>
+			</nz-breadcrumb-item>
+		</ng-container>
+		<small *ngIf="subtitle" style="font-size: 12px; width: 30%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis; display: inline-block; vertical-align: middle; ">{{subtitle}}</small>
+	</nz-breadcrumb> 
+	<ng-content></ng-content>
+</header>

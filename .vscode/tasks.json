@@ -1,0 +1,21 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        
+        {
+            "label": ">>>运行 星云标签管理",
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "ng serve nebula_ugcTagManagement  --port 4202",
+        },
+        {
+            "label": "生成--星云标签管理",
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "ng build nebula_ugcTagManagement   --prod --build-optimizer",
+        },
+    
+    ]
+}

@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+html, body{height: auto !important;}
+html::-webkit-scrollbar, body::-webkit-scrollbar{width: 0;}
+.ant-table-header{overflow: inherit !important;}
+.ant-table-body{overflow: inherit !important;max-height: inherit !important;}
+
+
+p{margin: 0;}
+.Transi{
+    -webkit-transition:all 150ms ease-out;
+       -moz-transition:all 150ms ease-out;
+         -o-transition:all 150ms ease-out;
+            transition:all 150ms ease-out;
+    }
+
+
+/* ===== Layout ===== */
+.ManageHeader {position: absolute; background: #2283E2;padding: 0;height: auto; color: #FFF; width: 100%;z-index: 99; }
+.ManageContent { position: relative; display: inline-block; top: 48px;padding-bottom: 22px;z-index: 66;}
+.ManageContent.ManageContentBot {min-height: calc(100vh - 132px);height:calc(100vh - 132px) ; }
+.SubtitleWrap {height: 56px;padding: 12px 22px;line-height:32px; background-color: #FFF;}
+.SubtitleWrap .Title{color: #354052;font-size: 20px;}
+.SubtitleWrap .Subtitle{position: relative; color: #7F8FA4; padding-left: 12px;margin-left: 12px; font-size: 14px;display: inline-block;}
+.SubtitleWrap .Subtitle:before{content:'';position:absolute;left:0;top:50%;bottom:auto;right:auto;margin-top: -7px; height:14px;width:1px;background-color:#DFE3E9;display:block;z-index:15;}
+
+.ManageFooter {position: absolute;bottom: 0; width: 100%; background-color: #fff; text-align: right; height: 72px;padding: 16px 50px;
+    box-shadow: 0 0 8px 0 rgba(51, 51, 51, 0.2);z-index: 88;}
+.ManageFooter button{margin-left: 30px;width: 92px; height: 40px;font-size: 16px;font-weight:500;}
+.ant-picker-range{margin-right: 0 !important;}
+.ant-layout-sider-zero-width-trigger {z-index: 999;}
+
+
+.HeaderWrap{position: fixed; top:0; width: 100%;height: 48px;background-color: #ffffff;font-size: 16px;padding: 0 10px;color: #8f0911;line-height: 48px; z-index: 5;
+   -webkit-box-shadow:0px 0px 6px 0px rgba(51, 51, 51, 0.2);
+           box-shadow:0px 0px 6px 0px rgba(51, 51, 51, 0.2);
+}
+.HeaderWrap .Title {float: left;font-weight: 400;}
+.HeaderWrap .Title a{color: #108ee9;}
+.HeaderWrap .Center {float: left; font-size: 14px;margin-left: 60px;}
+.HeaderWrap .Center a{margin-right: 16px;color: #999;padding:6px 12px; border-radius: 4px;}
+.HeaderWrap .Center a.active{ background-color: #108ee9; color: #fff;}
+.HeaderWrap .Search {float: left;margin-left: 20px; padding-top: 10px;}
+.HeaderWrap .Right {position: absolute;height: 48px; top: 0; right: 16px;}
+.WrapContent{overflow-y: auto;height: 100%;padding: 68px 20px;}
+.WrapContent .WrapConItem{width: 20%;padding: 10px 10px 10px; display: inline-block; float: left;}
+
+

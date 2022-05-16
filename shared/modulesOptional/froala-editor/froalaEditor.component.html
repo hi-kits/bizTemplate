@@ -1,0 +1,10 @@
+<div>
+    <div #FROALA_EDITOR [froalaEditor]="options" [(froalaModel)]="froalaText"
+        (froalaModelChange)="froalaChange($event)"></div>
+</div>
+<!-- 视频封面图 -->
+
+<app-cropper *ngIf='showCropperModal' [videoPosterUrl]='videoPosterUrl' (uploadEnd)='updateVideoPosterUrl($event)'
+    (closeModal)='closeCropperModa()'></app-cropper>
+
+<!-- 视频封面图 -->

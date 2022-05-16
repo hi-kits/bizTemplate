@@ -1,0 +1,50 @@
+<!--Search-->
+<form nz-form [formGroup]="SearchForm" (ngSubmit)="submit()" class="ant-advanced-search-form">
+	<div nz-row [nzGutter]="24">
+		<div nz-col [nzSpan]="4">
+			<nz-form-item>
+				<nz-form-label [nzSm]="8" [nzXs]="24">页面</nz-form-label>
+				<nz-form-control [nzSm]="16" [nzXs]="24">
+					<nz-select formControlName="pageType">
+                        <nz-option nzValue="" nzLabel="全部"></nz-option>
+                        <nz-option *ngFor="let item of pageTypeList" [nzValue]="item.code" [nzLabel]="item.name" ></nz-option>
+                    </nz-select>
+				</nz-form-control>
+			</nz-form-item>
+		</div>
+
+		<div nz-col [nzSpan]="5">
+			<nz-form-item>
+				<nz-form-label [nzSm]="8" [nzXs]="24">模板名称</nz-form-label>
+				<nz-form-control [nzSm]="16" [nzXs]="24">
+					<input nz-input formControlName="mouldName"  placeholder="模板名称" />
+				</nz-form-control>
+			</nz-form-item>
+		</div>
+		
+		<div nz-col [nzSpan]="5">
+			<nz-form-item>
+                <nz-form-label [nzSm]="8" [nzXs]="24">提审人</nz-form-label>
+                <nz-form-control [nzSm]="16" [nzXs]="24">
+                    <input nz-input formControlName="submitBy" placeholder="提审人" />
+                </nz-form-control>
+            </nz-form-item>
+		</div>
+
+		<div nz-col [nzSpan]="10">
+			<nz-form-item>
+				<nz-form-label [nzSm]="6" [nzXs]="24">提审时间段</nz-form-label>
+				<nz-form-control [nzSm]="18" [nzXs]="24">
+					<app-date-picker #DatePicker
+						dateType='range'
+						[value]='rangeDates'
+						[nzDisabledStatus]='nzDisabledStatus'
+						(ngModelChange)="change($event)"
+					></app-date-picker>
+					<input nz-input type="hidden" formControlName="rangeDate">
+				</nz-form-control>
+			</nz-form-item>
+		</div>
+	</div>
+</form>
+<!--Search end-->

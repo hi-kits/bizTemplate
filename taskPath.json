@@ -1,0 +1,104 @@
+{
+    "syn_feedback": {
+        "release": "/haierActivities/test/release/feedback/",
+        "product": "/haierActivities/test/product/feedback/",
+        "commad": "ng build syn_feedback --prod --build-optimizer",
+        "outputPath": "OPMH5_syn/feedback"
+    },
+    "APPPageManage": {
+        "release": "/release/zjm/bm/APPPageManage/",
+        "product": "/zjm/bm/APPPageManage/",
+        "commad": "ng build APPPageManage --prod --build-optimizer",
+        "outputPath": "OPMH5/APPPageManage"
+    },
+    "APPPageManage_SYN": {
+        "release": "/release/zjm/bm/APPPageManage_SYN/",
+        "product": "/zjm/bm/APPPageManage_SYN/",
+        "commad": "ng build APPPageManage_SYN --prod --build-optimizer",
+        "outputPath": "OPMH5/APPPageManage_SYN"
+    },
+    "materialManagement": {
+        "release": "/release/zjm/bm/materialManagement/",
+        "product": "/zjm/bm/materialManagement/",
+        "commad": "ng build materialManagement --prod --build-optimizer",
+        "outputPath": "OPMH5/materialManagement"
+    },
+    "serviceDisableConfiguration": {
+        "release": "/release/zjm/bm/serviceDisableConfiguration/",
+        "product": "/zjm/bm/serviceDisableConfiguration/",
+        "commad": "ng build serviceDisableConfiguration --prod --build-optimizer",
+        "outputPath": "OPMH5/serviceDisableConfiguration"
+    },
+    "applicationMaterialManage": {
+        "release": "/release/zjm/bm/applicationMaterialManage/",
+        "product": "/zjm/bm/applicationMaterialManage/",
+        "commad": "ng build applicationMaterialManage --prod --build-optimizer",
+        "outputPath": "OPMH5/applicationMaterialManage"
+    },
+    "APPPageAudit": {
+        "release": "/release/zjm/bm/APPPageAudit/",
+        "product": "/zjm/bm/APPPageAudit/",
+        "commad": "ng build APPPageAudit --prod --build-optimizer",
+        "outputPath": "OPMH5/APPPageAudit"
+    },
+    "ActivityAudit": {
+        "release": "/release/zjm/bm/ActivityAudit/",
+        "product": "/zjm/bm/ActivityAudit/",
+        "commad": "ng build ActivityAudit --prod --build-optimizer",
+        "outputPath": "OPMH5/ActivityAudit"
+    },
+    "ActivityManage": {
+        "release": "/release/zjm/bm/ActivityManage/",
+        "product": "/zjm/bm/ActivityManage/",
+        "commad": "ng build ActivityManage --prod --build-optimizer",
+        "outputPath": "OPMH5/ActivityManage"
+    },
+    "TaskManage": {
+        "release": "/release/zjm/bm/TaskManage/",
+        "product": "/zjm/bm/TaskManage/",
+        "commad": "ng build TaskManage --prod --build-optimizer",
+        "outputPath": "OPMH5/TaskManage"
+    },
+    "operateActivity": {
+        "release": "/release/zjm/bm/operateActivity/",
+        "product": "/zjm/bm/operateActivity/",
+        "commad": "ng build operateActivity --prod --build-optimizer",
+        "outputPath": "OPMH5/operateActivity"
+    },
+    "developerMessage": {
+        "release": "/release/zjm/comsm/developerMessage/",
+        "product": "/zjm/comsm/developerMessage/",
+        "commad": "ng build developerMessage --prod --build-optimizer",
+        "outputPath": "OPMH5_comm/developerMessage"
+    },
+    "developerMng": {
+        "release": "/release/zjm/comsm/developerMng/",
+        "product": "/zjm/comsm/developerMng/",
+        "commad": "ng build developerMng --prod --build-optimizer",
+        "outputPath": "OPMH5_comm/developerMng"
+    },
+    "messageChannel": {
+        "release": "/release/zjm/comsm/messageChannel/",
+        "product": "/zjm/comsm/messageChannel/",
+        "commad": "ng build messageChannel --prod --build-optimizer",
+        "outputPath": "OPMH5_comm/messageChannel"
+    },
+    "messageInstance": {
+        "release": "/release/zjm/comsm/messageInstance/",
+        "product": "/zjm/comsm/messageInstance/",
+        "commad": "ng build messageInstance --prod --build-optimizer",
+        "outputPath": "OPMH5_comm/messageInstance"
+    },
+    "msgNameMng": {
+        "release": "/release/zjm/comsm/msgNameMng/",
+        "product": "/zjm/comsm/msgNameMng/",
+        "commad": "ng build msgNameMng --prod --build-optimizer",
+        "outputPath": "OPMH5_comm/msgNameMng"
+    },
+    "openInterfaceMng": {
+        "release": "/release/zjm/comsm/openInterfaceMng/",
+        "product": "/zjm/comsm/openInterfaceMng/",
+        "commad": "ng build openInterfaceMng --prod --build-optimizer",
+        "outputPath": "OPMH5_comm/openInterfaceMng"
+    }
+}

@@ -1,0 +1,42 @@
+<nz-modal #Modal
+	[(nzVisible)]="isVisible"
+	[nzTitle]="Title"
+	[nzFooter]="Footer"
+	[nzMaskClosable]="nzMaskClosable"
+	[nzWidth]="nzWidth"
+	[nzStyle]="nzStyle"
+	[nzOkText]="OkText"
+	[nzCentered]="nzCentered"
+	[nzCloseOnNavigation]="nzCloseOnNavigation"
+	[nzCancelText]="CancelText"
+	(nzAfterOpen)="nzAfterOpen($event)"
+	(nzAfterClose)="nzAfterClose($event)"
+	[nzClosable]="nzClosable"
+	(nzOnOk)="handleOk()"
+	(nzOnCancel)="handleCancel($event)"
+	[nzClassName]="{'hideFooter':hideButton}"
+>
+	<ng-template #Title>{{title}}</ng-template>
+	<ng-container *nzModalContent>
+		<ng-content></ng-content>
+	</ng-container>
+	<!-- <ng-content *ngIf="isContent"></ng-content> -->
+
+	<ng-template #Footer>
+		<ng-container *ngIf="!hideButton">
+			<button nz-button *ngIf="!nzCancelDisabled" nzType="default" (click)="handleCancel()">{{CancelText}}</button>
+
+			<button nz-button nzType="primary" *ngIf="isConfirm" nz-popconfirm
+			[nzPopconfirmTitle]="confirmTemplate"
+			[nzLoading]="isLoading"
+			[nzOkText]="customConfirmButton"
+			(nzOnCancel)="confirmCancel()"
+			(nzOnConfirm)="handleOk()"
+			nzPopconfirmPlacement="top">{{OkText}}</button>
+
+			<button nz-button nzType="primary" [nzLoading]="loading" *ngIf="!isConfirm && !nzOkDisabled" (click)="handleOk()" >{{OkText}}</button>
+		</ng-container>
+	</ng-template>
+</nz-modal>
+
+

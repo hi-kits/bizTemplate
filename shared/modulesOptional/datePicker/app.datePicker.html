@@ -1,0 +1,33 @@
+<!-- range -->
+<nz-range-picker *ngIf="dateType === 'range'"
+	[(ngModel)]='value'
+	[nzFormat]="nzFormat"
+	[nzAllowClear]="nzAllowClear"
+	[nzShowTime]='nzShowTime'
+	[nzShowToday]='nzShowToday'
+	[nzInputReadOnly] = 'nzInputReadOnly'
+	[nzRanges]="nzRanges"
+	[nzDisabled]='nzDisabled'
+	[nzDisabledDate]="nzDisabledDate"
+	[nzDisabledTime]="nzDisabledTime"
+	(ngModelChange)="change($event)"
+	(nzOnCalendarChange)="nzOnCalendarChange($event)"
+	(nzOnOpenChange)="nzOnOpenChange($event)"
+	(nzOnOk)="onOk($event)"
+></nz-range-picker>
+<!-- range end -->
+<!-- date -->
+<nz-date-picker *ngIf="dateType === 'date'"
+	[(ngModel)]="value"
+	[nzFormat]="nzFormat"
+	[nzAutoFocus]="false"
+	[nzDisabled]='nzDisabled'
+	[nzAllowClear]="nzAllowClear"
+	[nzShowTime]="nzShowTime"
+	[nzShowToday]="nzShowToday"
+	[nzDisabledDate]="nzDisabledDate"
+	[nzDisabledTime]="nzDisabledTime"
+	(ngModelChange)="change($event)"
+	(nzOnOk)="onOk($event)"
+></nz-date-picker>
+<!-- date end -->

@@ -1,0 +1,44 @@
+<nz-upload *ngIf="type=='image'"
+	[nzAction]="nzAction"
+	nzListType="picture-card"
+	[nzAccept]="nzAccept"
+	[nzData]="nzData"
+	[nzRemove]="remove"
+	[nzDisabled]='nzDisabled'
+	[nzBeforeUpload]="beforeUpload"
+	[(nzFileList)]="nzFileList"
+	[nzShowUploadList]="showUploadList"
+	[nzShowButton]="nzFileList?.length < nzFileListSize"
+	(nzChange)="handleChange($event)"
+	[nzPreview]="handlePreview" class="UploadImg">
+	<i  nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
+	<div class="ant-upload-text">{{upload}}</div>
+</nz-upload>
+<nz-upload *ngIf="type=='file' || type=='video'"
+	[nzAction]="nzAction"
+	[nzAccept]="nzAccept"
+	[nzData]="nzData"
+	[nzDisabled]='nzDisabled'
+	[nzShowUploadList]="showUploadList"
+	[nzRemove]="removeFile"
+	[beforeRemove]='beforeRemove'
+	[nzBeforeUpload]="beforeUpload"
+	[(nzFileList)]="nzFileList"
+  [nzPreview]="nzPreview"
+	[nzShowButton]="nzFileList?.length < nzFileListSize"
+	(nzChange)="handleChange($event)">
+	<button  *ngIf="!notBtn" nz-button nzType="primary" type="button"><i nz-icon style="font-size: 14px" nzType="upload"></i><span>{{uploadFile}}</span></button>
+	<a *ngIf="notBtn">{{uploadFile}}</a>
+</nz-upload>
+<!-- 图片预览 -->
+<ng-template [ngIf]="previewVisible">
+	<nz-modal
+		[nzVisible]="previewVisible"
+		[nzZIndex]="nzZIndex"
+		[nzContent]="modalContent"
+		[nzFooter]="null"
+		(nzOnCancel)="previewVisible=false">
+		<!-- 图片 -->
+		<ng-template #modalContent><img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" /></ng-template>
+	</nz-modal>
+</ng-template>

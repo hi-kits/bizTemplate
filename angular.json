@@ -1,0 +1,125 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "APPPageManage": {
+      "root": "projects/APPPageManage/",
+      "sourceRoot": "projects/APPPageManage",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "OPMH5/APPPageManage",
+            "index": "src/index.html",
+            "main": "projects/APPPageManage/main.ts",
+            "polyfills": "projects/APPPageManage/polyfills.ts",
+            "tsConfig": "projects/APPPageManage/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "./projects/APPPageManage/assets/",
+                "output": "/assets/"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              },
+              "projects/APPPageManage/favicon.ico"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "shared/theme/theme.less",
+              "projects/APPPageManage/styles.less"
+            ],
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": ""
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": { "browserTarget": "APPPageManage:build" },
+          "configurations": {
+            "production": { "browserTarget": "APPPageManage:build:production" }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": { "browserTarget": "APPPageManage:build" }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/APPPageManage/src/test.ts",
+            "polyfills": "projects/APPPageManage/polyfills.ts",
+            "tsConfig": "projects/APPPageManage/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/APPPageManage/styles.css"
+            ],
+            "scripts": [],
+            "assets": ["projects/APPPageManage/assets"]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/APPPageManage/tsconfig.app.json",
+              "projects/APPPageManage/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    }
+   
+  },
+  "defaultProject": "APPPageManage",
+  "cli": {
+    "analytics": "e0075566-0c24-4eac-9aaf-991f963ba22d"
+  }
+}

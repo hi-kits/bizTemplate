@@ -1,0 +1,15 @@
+<span
+  nzType="primary"
+  nz-popover
+  [nzPopoverTitle]="title"
+  [nzPopoverVisible]="visible"
+  nzPopoverPlacement="left"
+  nzPopoverTrigger="click"
+  [nzPopoverContent]="Template"
+>
+<ng-content></ng-content>
+</span>
+
+<ng-template #Template>
+  <pre style="max-width:400px;word-wrap:break-word;word-break:normal;word-break:break-all;margin-bottom: 0;">{{contentTemplate}}</pre>
+</ng-template>

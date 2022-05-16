@@ -1,0 +1,30 @@
+
+.FormWrap{ margin: 22px 22px 0; background-color: #fff;border: 1px solid #DFE3E9;border-radius: 4px; padding: 22px;}
+
+.FormWrap ::ng-deep .ant-form-item-label > label{height: 40px;}
+
+:host {position: relative; height: 100%;}
+
+.Cropper{position: relative; height: 500px;margin: -25px -24px -24px; padding-left: 150px;}
+.Cropper .Ratio{position: absolute;top: 0;left: 0; height: 562px;background: #273143;width: 150px;display: inline-block;border-radius:0px 0px 0px 4px;font-size: 13px; color: #fff;text-align: center;}
+.Cropper .Ratio li{padding-top: 30px;}
+.Cropper .Ratio li.active {color: #2283E2;}
+.Cropper .Ratio li.active .Img{border: 1px solid #2283E2;}
+.Cropper .Ratio .Img{border: 1px solid #3c4b66;margin: 0 auto 10px;}
+.Cropper .Ratio .Img img{height: 100%; width: 100%;}
+.Cropper .Ratio .Img.Img4_3{width: 120px; height: 90px;}
+.Cropper .Ratio .Img.Img3_4{width: 120px; height: 160px;}
+.Cropper .Ratio .Img.Img5_2{width: 120px; height: 48px;}
+.Cropper .Ratio .Img.Img101{width: 120px; height: 120px;}
+.Cropper .Ratio .Img.Img102{width: 90px; height: 90px;}
+.Cropper .Ratio .Img.Img103{width: 64px; height: 64px;}
+.Cropper .Ratio .Img.Img104{width: 32px; height: 32px;}
+.Cropper .Constituency{width: 100%; height: 500px;}
+.Cropper .Avatar li{margin-bottom: -10px;}
+.Cropper .Avatar .Img{border-radius: 100%;overflow: hidden;margin: 0 auto;}
+dd, dl, dt, li, ol, ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.UpLoadImg input{position: absolute; top: 0;left: 0;z-index: 99; opacity: 0.001;width: 100%;height: 100%;}

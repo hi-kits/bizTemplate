@@ -1,0 +1,86 @@
+<!--Header-->
+<nz-header class="ManageHeader">
+	<header class="HeaderWrap">
+		<section class="Title">
+			<a href="javascript:;" [routerLink]="['/view/index']">APP页面审核</a>
+			/ {{_ParentItem.pageName + ' - ' + _ParentItem.mouldName}}</section>
+		<section class="Center">
+			
+		</section>
+		<section class="Search"></section>
+		<section class="Right"><a href="javascript:;" [routerLink]="['/view/index']"><i nz-icon nzType="arrow-left" style="color:#333;"></i></a>
+		</section>
+	</header>
+</nz-header>
+<!--Header end-->
+<!--PageBody-->
+<div class="ManageContent">
+
+	<!-- 表格 -->
+	<app-table #Table
+		[columns]="columns"
+		[nzData]="tableData" 
+		[nzTotal]="PageTotal"
+		[nzShowPagination]="false"
+		[nzLoading]="loading"
+		[(nzPageIndex)]="PageIndex"
+		[(nzPageSize)]="PageSize"
+		(nzPageIndexChange)="pageIndexChange()"
+		(nzPageSizeChange)="pageSizeChange()"
+	>
+	</app-table>
+	<!-- 表格 end -->
+
+	<div nz-row>
+		<div nz-col nzSpan="10">
+			<app-phone>
+				<div class="ImgWrap" >
+					<img [ngClass]="{'TabImg': _ParentItem.type == 1}" src="{{thumbnailUrl}}"/>
+				</div>
+			</app-phone>
+		</div>
+		<div nz-col nzSpan="12" *ngIf="[1,0].includes(_ParentItem.reviewStatus)">
+			<nz-divider nzText="功能审核结论"></nz-divider>
+			<form nz-form [formGroup]="AuditForm" class="FormWrap">
+
+				<nz-form-item>
+					<nz-form-label [nzSm]="5" [nzXs]="24" >上传测试报告</nz-form-label>
+					<nz-form-control [nzSm]="18" [nzXs]="24">
+		
+						<app-upload
+							[nzSize]="20"
+							[type]="'file'"
+							nzAccept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+							[nzFileListSize]="1"
+							[(nzFileList)]="fileList" 
+							(nzChange)="fileChange($event)"
+						></app-upload>
+		
+					</nz-form-control>
+				</nz-form-item>
+				
+				<nz-form-item>
+					<nz-form-label [nzSm]="5" [nzXs]="24" >审核描述</nz-form-label>
+					<nz-form-control [nzSm]="18" [nzXs]="24">
+						<textarea formControlName="reviewDesc" nz-input rows="10" placeHolder="请输入审核意见"></textarea>
+		
+					</nz-form-control>
+				</nz-form-item>
+
+				<nz-form-item>
+					<nz-form-control [nzSm]="18" [nzXs]="24" nzOffset="5">
+						
+						<button nz-button nzSize="large" (click)="submitForm(true)" [nzLoading]="isLoading" nzType="primary" style="margin-right: 50px;">通过</button>
+						<button nz-button nzSize="large" (click)="submitForm(false)"  [nzLoading]="isLoading" nzType="default">不通过</button>
+		
+					</nz-form-control>
+				</nz-form-item>
+				
+			</form>
+			
+		</div>
+	</div>
+
+
+</div>
+<!--PageBody end-->

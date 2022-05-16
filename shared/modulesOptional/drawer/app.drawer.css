@@ -1,0 +1,2 @@
+::ng-deep .DrawerWrap >>> .ant-drawer-header{width: 100%;top:0;z-index: 9;}
+::ng-deep .DrawerWrap >>> .ant-drawer-body{bottom: 0;left: 0;right: 0;padding:0;}

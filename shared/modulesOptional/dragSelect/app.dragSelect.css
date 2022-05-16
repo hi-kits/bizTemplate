@@ -1,0 +1,103 @@
+* {
+        font-family: sans-serif;
+      }
+      .table-wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 1000px;
+      }
+      table,
+      tr,
+      td {
+        user-select: none;
+        border-collapse: collapse;
+      }
+      table {
+        margin: 0 50px 0 0;
+      }
+      table td {
+        width: 25px;
+        height: 20px;
+        border: 1px solid #ccc;
+        margin: 0px;
+        text-align: center;
+        color: #666;
+        font-size: 15px;
+      }
+      table td.selectable-cell {
+        font-size: 13px;
+      }
+      table td.col-label {
+        text-align: center;
+        border-color: transparent;
+        padding-bottom: 5px;
+        font-weight: bold;
+      }
+      table td.col-label:nth-child(n+2) {
+        border-bottom-color: #ccc;
+      }
+      table td.row-label {
+        width: 50px;
+        text-align: right;
+        border-color: transparent;
+        padding: 0 10px;
+        font-weight: bold;
+      }
+      table td.row-label:nth-child(n+2) {
+        text-align: left;
+      }
+      table td.row-label:nth-child(1) {
+        border-right-color: #ccc;
+      }
+      table td.row-spacer {
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+      }
+      table td.col-spacer {
+        border-color: transparent;
+      }
+      table td.col-spacer.border-right {
+        border-right-color: #ccc;
+      }
+      table td.is-pending {
+        background-color: hsl(0, 0%, 95%);
+      }
+      table td.is-selected {
+        background-color: hsl(80, 65%, 74%);
+      }
+      table td.is-selected.is-pending {
+        background-color: hsl(80, 47%, 70%);
+      }
+      table.daypart-picker tr .row-label {
+        color: #ddd;
+      }
+      table.daypart-picker tr:nth-child(3n-1) .row-label {
+        color: #666;
+      }
+      table.date-picker tr .odd {
+        color: #444;
+        background-color: hsl(0, 0%, 97%);
+      }
+      table.date-picker tr .odd.is-pending {
+        background-color: hsl(0, 0%, 90%);
+      }
+      table.date-picker tr .odd.is-selected {
+        background-color: hsl(80, 65%, 67%);
+      }
+      table.date-picker tr .odd.is-selected.is-pending {
+        background-color: hsl(80, 47%, 68%);
+      }
+      table.date-picker tr .row-label {
+        color: transparent;
+      }
+      table.date-picker tr .row-label.first-label-instance {
+        color: #666;
+      }
+      .instructions {
+        max-width: 895px;
+        margin: 20px;
+        padding: 10px;
+        background-color: hsl(50, 81%, 94%);
+        border: 1px solid hsl(50, 51%, 64%);
+      }
+      

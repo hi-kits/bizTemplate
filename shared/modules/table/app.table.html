@@ -1,0 +1,295 @@
+<!-- table -->
+<nz-table
+id="NGTABLES"
+class="NGTABLES"
+#smallTable
+[nzLoading]="nzLoading"
+nzShowSizeChanger
+[nzFrontPagination]="nzFrontPagination"
+[nzShowPagination]="nzShowPagination"
+[nzPageSizeOptions]="[10,20,50]"
+[nzShowTotal]="nzShowTotal"
+[nzScroll]="dynamicScroll"
+[nzData]="nzData"
+[nzTotal]="nzTotal"
+nzTableLayout="auto"
+[nzShowQuickJumper]="nzShowQuickJumper"
+[(nzPageIndex)]="nzListIndex"
+[(nzPageSize)]="nzPageSize"
+(nzPageIndexChange)="pageIndexChange()"
+(nzPageSizeChange)="PageSizeChange()"
+(nzCurrentPageDataChange)="currentPageDataChange($event)"
+(nzQueryParams)="onQueryParamsChange($event)">
+
+<thead>
+	<tr class="Thead">
+		<!-- 展开 -->
+		<ng-container *ngIf="nzShowExpand">
+			<th nzLeft nzShowExpand nzWidth="50px" [ngStyle]="{ 'z-index': '250'}" class="ShowExpand"></th>
+		</ng-container>
+
+		<!-- 选择 -->
+		<ng-container *ngIf="nzShowCheckbox">
+			<th nzLeft class="ShowCheckbox" nzWidth="50px" [ngStyle]="{ 'z-index': '250'}" nzShowCheckbox
+				[(nzChecked)]="allChecked"
+				[(nzDisabled)]="allDisabled"
+				[nzIndeterminate]="indeterminate"
+				(nzCheckedChange)="checkAll($event)"
+			></th>
+		</ng-container>
+		<!-- 数据 -->
+		<ng-container *ngFor="let data of columns; let colIndex = index; trackBy: trackByFn">
+			<th nzAlign='center' *ngIf="colIndex == 0 && scrollX != 0; else elsecolIndex"
+				nzLeft
+				[nzWidth]="data.width ? data.width : 'auto'"
+				[ngStyle]="{ 'z-index': '250'}"
+				[ngClass]="{'Center':data.key == 'index'}"
+			>{{data.title}}</th>
+			<ng-template #elsecolIndex>
+				<!-- 操作 -->
+				<th *ngIf="data.key == 'operation'"
+					[nzRight]="scrollX != 0"
+					nzAlign='center'
+					[nzWidth]="data.width ? data.width : 'auto'"
+					[ngClass]="{'Center':data.key == 'index'}"
+				>{{data.title}}</th>
+				<!-- 排序 -->
+				<th nzAlign='center' *ngIf="data.key != 'operation' && data.sortDirections && data.sortFn"
+					[nzWidth]="data.width ? data.width : 'auto'"
+					[ngClass]="{'Center':data.key == 'index'}"
+					[nzColumnKey]="data.key"
+					[nzSortFn]="data.sortFn"
+					[(nzSortOrder)]="data.sortOrder"
+					[nzSortDirections]="data.sortDirections"
+				>{{data.title}}</th>
+				<!-- 非操作 -->
+				<th nzAlign='center' *ngIf="data.key != 'operation'  && !data.sortDirections && !data.sortFn"
+					[nzWidth]="data.width ? data.width : 'auto'"
+					[ngClass]="{'Center':data.key == 'index'}"
+				>{{data.title}}</th>
+			</ng-template>
+
+		</ng-container>
+	</tr>
+</thead>
+
+<tbody>
+	<ng-template ngFor let-trItme let-trItmeIndex="index" [ngForTrackBy]="trackByFn" [ngForOf]="smallTable.data">
+		<tr>
+			<!-- 展开 -->
+			<ng-container  *ngIf="nzShowExpand">
+				<td nzLeft="0px" class="ShowExpand" nzShowExpand
+					[(nzExpand)]="trItme['STATE-EXPAND']"
+					(nzExpandChange)="collapse(trItme.children, trItme, trItmeIndex, $event)"
+				></td>
+			</ng-container>
+			<!-- 选择 -->
+			<ng-container *ngIf="nzShowCheckbox">
+				<td [nzLeft]="checkboxLeft" class="ShowCheckbox"  nzShowCheckbox
+					[(nzChecked)]="trItme.checked"
+					[nzDisabled]="trItme.disabled"
+					(nzCheckedChange)="checkedChange(trItme, trItmeIndex, $event)"
+				></td>
+			</ng-container>
+			<!-- 数据 -->
+			<ng-container *ngTemplateOutlet="tableTd; context: {trItme:trItme}"></ng-container>
+		</tr>
+		<!-- 展开项 子数据 -->
+		<ng-template [ngIf]="trItme['STATE-EXPAND']">
+			<ng-container  *ngIf="trItme['STATE-EXPAND']">
+				<tr [nzExpand]="trItme['STATE-EXPAND']">
+					<div [attr.colspan]="colspan" class="ChildrenTable" style="padding:0">
+						<nz-table class="ChildrenTemp"
+							[nzData]="trItme.children"
+							[nzShowPagination]="false"
+						>
+							<thead>
+								<tr>
+									<!-- 展开 -->
+									<th nzLeft nzWidth="50px" *ngIf="nzShowExpand"></th>
+									<!-- 选择 -->
+									<th nzLeft nzWidth="50px" *ngIf="nzShowCheckbox"></th>
+									<th nzWidth="50px" [nzWidth]="data.width ? data.width : 'auto'" *ngFor="let data of columns; let colIndex = index; trackBy: trackByFn"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let data of trItme.children">
+									<!-- 展开占位 -->
+									<td nzLeft="0px" nzWidth="50px" class="ShowExpand" *ngIf="nzShowExpand" style="border-bottom:0"></td>
+									<!-- 选择占位 -->
+									<td [nzLeft]="checkboxLeft" nzWidth="50px" class="ShowCheckbox" *ngIf="nzShowCheckbox"></td>
+									<!-- 展开项子列表数据 -->
+									<ng-container *ngTemplateOutlet="tableTd; context: {Sub:true, trItme:data}"></ng-container>
+								</tr>
+							</tbody>
+						</nz-table>
+					</div>
+				</tr>
+			</ng-container>
+		</ng-template>
+	</ng-template>
+</tbody>
+</nz-table>
+
+<!-- 列表数据模板 -->
+<ng-template #tableTd let-trItme="trItme" let-Sub="Sub">
+	<ng-container *ngFor="let colItme of columns; let colIndex = index;  trackBy: trackByFn">
+		<td *ngIf="colIndex == 0 && scrollX != 0; else elseTdIndex"
+			[nzLeft]="colIndexLeft"
+			[nzWidth]="colItme.width ? colItme.width : 'auto'"
+			[ngClass]="{'Center':colItme.key == 'index'}" >
+			<ng-container *ngTemplateOutlet="tableTdContext; context: {Sub:Sub, trItme:trItme, colItme:colItme}"></ng-container>
+		</td>
+		<ng-template #elseTdIndex>
+			<!-- 操作 -->
+			<td *ngIf="colItme.key == 'operation'"
+				[nzRight]="scrollX != 0 ? '0px': false"
+				[nzWidth]="colItme.width ? colItme.width : 'auto'"
+				nzAlign='center'>
+				<ng-container *ngTemplateOutlet="tableTdContext; context: {Sub:Sub, trItme:trItme, colItme:colItme}"></ng-container>
+			</td>
+			<!-- 非操作 -->
+			<td *ngIf="colItme.key != 'operation'"
+			[nzWidth]="colItme.width ? colItme.width : 'auto'"
+				[ngClass]="{'Center':colItme.key == 'index'}">
+				<ng-container *ngTemplateOutlet="tableTdContext; context: {Sub:Sub, trItme:trItme, colItme:colItme}"></ng-container>
+			</td>
+
+		</ng-template>
+	</ng-container>
+
+</ng-template>
+
+<ng-template #tableTdContext let-trItme="trItme" let-Sub="Sub" let-colItme="colItme">
+	<ng-container [ngSwitch]="colItme.key">
+		<!-- 操作栏 -->
+		<ng-container *ngSwitchCase="'operation'">
+			<span nzRight="0px" *ngFor="let render of colItme.render;  trackBy: trackByFn">
+
+				<ng-container [ngSwitch]="render.type">
+					<!-- 操作栏 删除 -->
+					<ng-container *ngSwitchCase="'delete'">
+						<a nz-popconfirm  [nzPopconfirmTitle]="warn(trItme[render.key], render.name)" (nzOnConfirm)="render.call(trItme)" class="Link" *ngIf="!hide(render, trItme)" [ngClass]="render.class" [attr.disabled]="disabled(render, trItme)">{{render.name}}</a>
+					</ng-container>
+					<!-- 操作栏 自定义 -->
+					<!-- <ng-container *ngSwitchCase="'custom'">
+						<span nz-popconfirm  [nzTitle]="render.key" (nzOnConfirm)="render.call(trItme)">
+							<a class="Link" *ngIf="!hide(render, trItme)" [ngClass]="render.class" [attr.disabled]="disabled(render, trItme)" nz-popconfirm>{{render.name}}</a>
+						</span>
+					</ng-container> -->
+					<!-- 操作栏 提醒 -->
+					<ng-container *ngSwitchCase="'remind'">
+							<ng-template #remindinnerHTMLTemplate>
+								<i nz-icon nzType="exclamation-circle" style="color: #faad14;" nzTheme="fill"></i>
+								<div style="padding-left: 20px" *ngIf="render.value" [innerHTML]="render.value"></div>
+								<div style="padding-left: 20px" *ngIf="render.message" [innerHTML]="render.message(trItme)"></div>
+							</ng-template>
+							<a nz-popconfirm  *ngIf="render.logic(trItme) && !hide(render, trItme)"  [nzPopconfirmTitle]="remindinnerHTMLTemplate" (nzOnConfirm)="render.call(trItme)" class="Link" [ngClass]="render.class" [attr.disabled]="disabled(render, trItme)">{{render.name}}</a>
+					</ng-container>
+					<!-- 操作栏 子列表操作 -->
+					<ng-container *ngSwitchCase="'sub'">
+						<a class="Link" *ngIf="Sub && !hide(render, trItme)" [ngClass]="render.class" [attr.disabled]="disabled(render, trItme)"  (click)="render.call(trItme)">{{render.name}}</a>
+					</ng-container>
+					<!-- 操作栏 开关 -->
+					<ng-container *ngSwitchCase="'switch'">
+						<a *ngIf="!hide(render, trItme) && render.disPopConfirm" (click)="render.call(trItme)" class="Link" [ngClass]="render.class" [attr.disabled]="disabled(render, trItme)">{{render.name[trItme[render.value]]}}</a>
+						<a nz-popconfirm *ngIf="!hide(render, trItme) && !render.disPopConfirm" [nzPopconfirmTitle]="warn(trItme[render.key], render.name[trItme[render.value]])" (nzOnConfirm)="render.call(trItme)" class="Link"  [ngClass]="render.class" [attr.disabled]="disabled(render, trItme)">{{render.name[trItme[render.value]]}}</a>
+					</ng-container>
+					<!-- 操作栏 popover -->
+					<ng-container *ngSwitchCase="'popover'">
+						<a app-popover class="Link" *ngIf="!hide(render, trItme)" [ngClass]="render.class"  [attr.disabled]="disabled(render, trItme)"
+						[title]="render.option.title"
+						[contentTemplate]="trItme[render.option.contentTemplate]"
+						(click)="render.call(trItme)"
+						>{{render.name}}</a>
+					</ng-container>
+					<!-- 操作栏 匹配某个值是否存在 -->
+					<ng-container *ngSwitchCase="'match'">
+						<a class="Link" *ngIf="render.logic(trItme) && !hide(render, trItme)" [ngClass]="render.class" [attr.disabled]="disabled(render, trItme)" (click)="render.call(trItme)">{{render.name}}</a>
+					</ng-container>
+					<!-- 操作栏 默认 -->
+					<ng-container *ngSwitchDefault>
+						<a class="Link" *ngIf="!hide(render, trItme)" [ngClass]="render.class" [attr.disabled]="disabled(render, trItme)" (click)="render.call(trItme)">{{render.name}}</a>
+					</ng-container>
+				</ng-container>
+
+			</span>
+		</ng-container>
+		<!-- 列表数据默认 -->
+		<ng-container *ngSwitchDefault>
+			<!-- 逻辑运算结果 -->
+			<span *ngIf="trItme['VALUE-' + colItme.key]; else elseLogic">
+				<div *ngIf="!colItme.hide; else innerHTMLHide" [innerHTML]="evaluation(trItme,colItme,Sub) | keepHtml"></div>
+				<ng-template #innerHTMLHide>
+					<div [nzTooltipTitle]="innerHTMLTemplate"
+						nz-tooltip
+						class="tdWrap"
+						[ngStyle]="{'-webkit-line-clamp':colItme.line}"
+						[innerHTML]="evaluation(trItme,colItme,Sub) | keepHtml">
+					</div>
+					<ng-template #innerHTMLTemplate>
+						{{trItme[colItme.key]}}
+					</ng-template>
+				</ng-template>
+			</span>
+
+			<!-- 默认结果 -->
+			<ng-template #elseLogic>
+				<span *ngIf="trItme['MULTI-' + colItme.key]; else elseMulti">
+					<!-- 非隐藏属性 -->
+					<ng-container *ngIf="!colItme.hide; else innerHTMLHide">
+						<!-- Html模板 -->
+						<div *ngIf="trItme['TEMP-is' + colItme.key]; else TEMPHide">
+							<ng-container *ngTemplateOutlet="template[trItme['TEMP-' + colItme.key]]; context: {trItme:trItme}"></ng-container>
+						</div>
+						<ng-template #TEMPHide >
+							<div [innerHTML]="trItme['MULTI-' + colItme.key] | keepHtml"></div>
+						</ng-template>
+					</ng-container>
+					<!-- 隐藏属性-文本提示 -->
+					<ng-template #innerHTMLHide>
+						<div [nzTooltipTitle]="innerHTMLTemplate"
+							nz-tooltip
+							class="tdWrap"
+							[ngStyle]="{'-webkit-line-clamp':colItme.line}"
+							[innerHTML]="trItme['MULTI-' + colItme.key] | keepHtml">
+						</div>
+						<ng-template #innerHTMLTemplate>
+							{{trItme['MULTI-' + colItme.key]}}
+						</ng-template>
+					</ng-template>
+				</span>
+
+				<ng-template #elseMulti>
+					<!-- 非隐藏属性 -->
+					<span *ngIf="!colItme.hide; else elseHide">
+						<!-- Html模板 -->
+						<div *ngIf="trItme['TEMP-is' + colItme.key]; else TEMPHide">
+							<ng-container *ngTemplateOutlet="template[trItme['TEMP-' + colItme.key]]; context: {trItme:trItme}"></ng-container>
+						</div>
+						<ng-template #TEMPHide>
+							{{trItme[colItme.key]}}
+						</ng-template>
+					</span>
+					<!-- 隐藏属性-文本提示 -->
+					<ng-template #elseHide>
+						<div [nzTooltipTitle]="Exclamation"
+							nz-tooltip
+							class="tdWrap"
+							[ngStyle]="{'-webkit-line-clamp':colItme.line}"
+						>
+							{{trItme[colItme.key]}}
+						</div>
+						<ng-template #Exclamation>
+							{{trItme[colItme.key]}}
+						</ng-template>
+					</ng-template>
+				</ng-template>
+			</ng-template>
+
+		</ng-container>
+	</ng-container>
+</ng-template>
+<!-- table -->
+
+<!-- <ng-content></ng-content> -->

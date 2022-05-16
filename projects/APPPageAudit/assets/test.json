@@ -1,0 +1,26 @@
+{
+  "subjectQuery": {
+    "retCode": "00000",
+    "retInfo": "操作成功",
+    "data": {
+        "items": [
+            {
+                "id": 1,
+                "rownum": 1,
+                "seminarName": "测试",
+                "seminarDetail": "描述",
+                "seminarTypeCode": 0,
+                "seminarTypeName": "无",
+                "statusCode": 1,
+                "sortCode": 10,
+                "isShare": 1,
+                "shareTitle": "",
+                "shareSubhead": ",",
+                "createTime":"2019-01-11 17:59:00",    
+                "operator":"创建人",
+                "shareLogoPath":"https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"                         
+            }
+        ]
+    }
+  }
+}

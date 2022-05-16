@@ -1,0 +1,10 @@
+
+.Radio ::ng-deep .ant-radio-button-wrapper{border: none;background:none ;margin: 0;border-radius:20px;padding: 0 12px;}
+.Radio ::ng-deep .ant-radio-button-wrapper.ant-radio-button-wrapper-checked{background:#2283e2;color: #fff;height: 26px;
+    line-height: 26px;
+    padding: 0 12px;}
+.Radio ::ng-deep .ant-radio-button-wrapper:not(:first-child)::before{ display: none}
+
+::ng-deep .AuditA {border-radius: 30px; padding: 0 6px; background-color: rgba(7, 76, 179, 0.85); color: #fff !important;}
+::ng-deep .AuditB {border-radius: 30px; padding: 0 6px; background-color: rgba(20, 167, 51, 0.85); color: #fff !important;}
+::ng-deep .AuditC {border-radius: 30px; padding: 0 6px; background-color: rgba(170, 14, 3, 0.85); color: #fff !important;}

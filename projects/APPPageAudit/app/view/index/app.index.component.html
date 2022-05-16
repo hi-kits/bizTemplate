@@ -1,0 +1,73 @@
+<!--Header-->
+<nz-header class="ManageHeader">
+	<header class="HeaderWrap">
+		<section class="Title">APP页面审核</section>
+		<section class="Center">
+			<a href="javascript:;" [ngClass]="{'active': auditStatusValue == 9}" (click)="auditStatus(9)" >全部</a>
+			<a href="javascript:;" [ngClass]="{'active': auditStatusValue == 0}" (click)="auditStatus(0)">待审核</a>
+			<a href="javascript:;" [ngClass]="{'active': auditStatusValue == 1}" (click)="auditStatus(1)">审核中</a>
+			<a href="javascript:;" [ngClass]="{'active': auditStatusValue == 2}" (click)="auditStatus(2)">已通过</a>
+			<a href="javascript:;" [ngClass]="{'active': auditStatusValue == 3}" (click)="auditStatus(3)">未通过</a>
+		</section>
+		<section class="Search"></section>
+		<section class="Right"></section>
+	</header>
+</nz-header>
+<!--Header end-->
+<!--PageBody-->
+<nz-content id="ManageContent" class="ManageContent">
+	<!-- 搜索 -->
+	<app-search *ngIf="isShowQuery">
+		<app-lookup #Search
+			[(searchInfo)]="searchObj"
+			(searchSubmitChange)="searchSubmitChange()"
+		></app-lookup>
+	</app-search>
+	<!-- 搜索 end -->
+	<!--ToolBar-->
+	<app-toolbar>
+		<div nz-row>
+			<div nz-col nzSpan="14">
+				<!-- <button *ngIf="power.add.type" [routerLink]="['addEdit','0']" nz-button nzType="primary"><i nz-icon nzType="plus"></i>录入</button> -->
+			</div>
+			<div class="Right" nz-col nzSpan="10">
+				<button *ngIf="isShowQuery" nz-button nzType="primary" (click)="query()"><i nz-icon nzType="search"></i>查询</button>
+				<button *ngIf="isShowQuery" nz-button nzType="default" (click)="reset()"><i nz-icon nzType="redo"></i>重置</button>
+				<app-fold
+					[(foldState)]="isShowQuery"
+					(foldChange)="foldChange($event)"
+				></app-fold>
+			</div>
+		</div>
+	</app-toolbar>
+	<!--ToolBar end-->
+
+	<!--筛选选项 end-->
+	<section class="FilterOptions">
+		<app-contentlookup  #Search
+			[(searchInfo)]="searchObj"
+			(searchSubmitChange)="searchSubmitChange()"
+		></app-contentlookup>
+	</section>
+	<!--筛选选项 end-->
+
+	<app-table #Table 
+	*ngIf="isTable"
+	[columns]="columns"
+	[nzData]="tableData" 
+	[nzTotal]="PageTotal"
+	[nzLoading]="loading"
+	[(nzPageIndex)]="PageIndex"
+	[(nzPageSize)]="PageSize"
+	(nzPageIndexChange)="pageIndexChange()"
+	(nzPageSizeChange)="pageSizeChange()"
+	>
+	</app-table>
+
+
+</nz-content>
+<!--PageBody end-->
+
+<router-outlet
+	(deactivate)='onDeactivate($event)'
+></router-outlet>

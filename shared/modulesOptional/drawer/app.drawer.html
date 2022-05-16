@@ -1,0 +1,20 @@
+<nz-drawer 
+	[nzTitle]="nzTitle" 
+	[nzWidth]="nzWidth"
+	[nzHeight]="nzHeight"
+	[nzOffsetX]="nzOffsetX"
+	[nzOffsetY]="nzOffsetY"
+	[nzWrapClassName]="nzWrapClassName"
+	[nzBodyStyle]="nzBodyStyle"
+	[nzClosable]="nzClosable"
+	[nzFooter]="nzFooter"
+	[nzMaskClosable]="nzMaskClosable" 
+	[nzVisible]="nzVisible" 
+	[nzPlacement]="nzPlacement" 
+	(nzOnClose)="close()"
+>
+<!-- <ng-template nzModalContent></ng-template> -->
+<ng-container *nzDrawerContent>
+	<ng-content></ng-content>
+</ng-container>
+</nz-drawer>

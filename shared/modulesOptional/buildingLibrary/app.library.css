@@ -1,0 +1,9 @@
+.BuildingLibrary{ text-align: center;height: 450px;margin-top: 15px; user-select:none;
+        overflow: hidden;
+        overflow-y: auto;}
+.BuildingLibrary .Item{padding: 10px 5px;margin-bottom: 5px;border: 1px solid #fff;border-radius: 4px;cursor: pointer;}
+.BuildingLibrary .Item:hover{border: 1px #C3D8F0 solid; background-color: #E9F3FD;}
+.BuildingLibrary .Item .Img{height: 64px;}
+.BuildingLibrary .active{border: 1px rgb(163, 230, 163) solid; background-color: rgb(233, 253, 234);}
+.BuildingLibrary .active:hover{border: 1px rgb(163, 230, 163) solid; background-color: rgb(233, 253, 234);}
+.BuildingLibrary .Name{height: 36px;overflow: hidden; word-wrap:break-word;word-break:normal;word-break:break-all}

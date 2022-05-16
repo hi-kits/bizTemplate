@@ -1,0 +1,126 @@
+/* 筛选条件样式 */
+.SearchWrap{
+    padding: 0 20px !important;
+    background-color: #fff !important;
+}
+.SearchWrap .ant-advanced-search-form {
+    padding: 9px 0 10px;
+    border-bottom: 1px solid #d9d9d9;
+}
+.SearchWrap .ant-advanced-search-form .ant-form-item .ant-form-item-label{
+    text-align: center;
+}
+/* 工具条按钮样式 */
+app-toolbar section.ToolBarWrap{
+    background-color: #fff !important;
+    margin: 0 !important;
+    padding: 16px 16px !important;
+}
+.ant-btn.ant-btn-primary {
+    color: #fff;
+    background-color: #6981f8;
+    border-color: #6981f8;
+    text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+    box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+}
+.ant-btn {
+    line-height: 1.499;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    border: 1px solid transparent;
+    box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    height: 32px;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.65);
+    background-color: #fff;
+    border-color: #d9d9d9;
+}
+/* 表格table样式 */
+#NGTABLES.NGTABLES.ant-table-wrapper{
+    background-color: #fff;
+    margin-top: 0;
+    padding-top: 0;
+}
+.NGTABLES.ant-table-wrapper .ant-table .ant-table-container .ant-table-header {
+    box-shadow: none;
+}
+.NGTABLES.ant-table-wrapper .ant-table-container .ant-table-body {
+    box-shadow: none;
+}
+.NGTABLES.ant-table-wrapper .ant-spin-container .ant-table {
+    border: 1px solid #e8e8e8;
+}
+.NGTABLES.ant-table-wrapper .ant-table-thead > tr > th {
+    background: #f7f8ff;
+    border-right: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 14px;
+    padding: 7px 8px;
+}
+.NGTABLES.ant-table-wrapper .ant-table-header.nz-table-hide-scrollbar .ant-table-thead > tr > th::before {
+    width: 0;
+    height: 0;
+}
+.NGTABLES.ant-table-wrapper .ant-table-thead > tr:first-child > th:first-child {
+    border-top-left-radius: 4px;
+}
+.NGTABLES.ant-table-wrapper .ant-table-thead > tr:first-child > th:last-child {
+    border-top-right-radius: 4px;
+}
+.NGTABLES.ant-table-wrapper .ant-table-tbody > tr.ant-table-row > td {
+    padding: 10px 8px;
+    font-size: 13px;
+    line-height: 1;
+}
+.NGTABLES.ant-table-wrapper .ant-table-tbody > tr.ant-table-row:hover > td {
+    background: #f7f8ff;
+}
+.NGTABLES.ant-table-wrapper .ant-table-pagination{
+    background-color: #fff;
+    padding: 20px 0 0;
+}
+.NGTABLES.ant-table-wrapper .ant-table-pagination .ant-pagination-item-active{
+    font-weight: 500;
+    background: #fff;
+    border-color: #6981f8;
+}
+.NGTABLES.ant-table-wrapper .ant-table-pagination .ant-pagination-item-active a{
+    color: #6981f8;
+}
+.NGTABLES.ant-table-wrapper .ant-spin-container .ant-table-ping-left .ant-table-body .ant-table-cell-fix-left:after {
+    position: absolute;
+    box-shadow: inset 10px 0 8px -8px rgb(0 0 0 / 15%);
+    top: 0;
+    right: 0;
+    bottom: -1px;
+    width: 30px;
+    transform: translateX(100%);
+    transition: box-shadow 0.3s;
+    content: '';
+    pointer-events: none;
+}
+.NGTABLES.ant-table-wrapper .ant-spin-container .ant-table-ping-right .ant-table-body .ant-table-cell-fix-right:after {
+    box-shadow: inset -10px 0 8px -8px rgb(0 0 0 / 15%);
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: 0;
+    width: 30px;
+    transform: translateX(-100%);
+    transition: box-shadow 0.3s;
+    content: '';
+    pointer-events: none;
+} 

@@ -1,0 +1,58 @@
+<!--提交表单-->
+<nz-modal
+    #Modal
+    [nzWidth]="650"
+	[nzTitle]="title"
+	[(nzVisible)]="showCropperModal"
+	nzMaskClosable=false
+	[nzContent]="modalContent"
+    [nzFooter]="modalFooter"
+    (nzOnOk)="submitForm()"
+	(nzOnCancel)="handleCancel()"
+>
+    <ng-template #modalContent>
+        <div class="Cropper">
+            <!--cropperType 1 文章封面展示 2上传头像  4 文章正文（富文本中）视频封面 -->
+            <!-- coverType 封面展示类型 1：单小图  2：三图 3：无封面 4：单大图 -->
+            <!-- viewType  视图类型 1：图文  2：文章 3：短视频 4：常见故障 -->
+        <ul class="Ratio">
+            <li [ngClass]="{'active': RatioValue == 1}">
+                <div (click)="switchRatio(1)" class="Img Img4_3"><img *ngIf='croppedImage' [src]="croppedImage" /></div>
+                4:3
+            </li>
+            <li [ngClass]="{'active': RatioValue == 2}">
+                <div (click)="switchRatio(2)" class="Img Img3_4"><img *ngIf='croppedImage' [src]="croppedImage" /></div>
+                3:4
+            </li>
+            <li [ngClass]="{'active': RatioValue == 3}">
+                <div (click)="switchRatio(3)" class="Img Img4_3"><img *ngIf='croppedImage' [src]="croppedImage" /></div>
+                GIF动图
+            </li>
+        </ul>
+        <div class="Constituency">
+            <image-cropper
+                [imageChangedEvent]="imageChangedEvent"
+                [aspectRatio]="aspectRatio"
+                [maintainAspectRatio]="maintainAspectRatio"
+                format="jpeg"
+                [imageBase64]="imageBase64"
+                [resizeToWidth]="resizeToWidth"
+                (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded()"
+                (cropperReady)="cropperReady()"
+                (loadImageFailed)="loadImageFailed()"
+                [disabled]="idDisabled"
+            ></image-cropper>
+        </div>
+    </div>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button *ngIf="RatioValue != 3" nz-button class="PosR UpLoadImg"><input type="file" accept="image/gif,image/jpg,image/jpeg,image/bmp,image/png" (change)="fileChangeEvent($event)" />上传图片</button>
+            <!-- GIF动图 只能上传gif图 -->
+            <button *ngIf="RatioValue == 3" nz-button class="PosR UpLoadImg"><input type="file" accept="image/gif" (change)="fileChangeEvent($event)" />上传图片</button>
+
+            <button nz-button (click)="close()">取消</button>
+
+            <button nz-button nzType="primary" (click)="handleOk()" >确认</button>
+    </ng-template>
+</nz-modal>
