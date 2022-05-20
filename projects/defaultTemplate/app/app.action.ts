@@ -40,7 +40,7 @@ export class ViewAction {
             this.message.warning(error.result.message);
         });
     }
-
+    // 拦截器回调
     private interceptorCallback(req: HttpRequest<any>, HEADERS) {
         // do something
         if (req['urlType'] === 'exportWithXToken' && window.localStorage.getItem(window.parent.location.pathname + 'pro__Access-Token')) {
