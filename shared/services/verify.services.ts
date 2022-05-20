@@ -8,21 +8,22 @@
  * 传递的参数是当前需要验证的表单的FormControl
  * 通过传递的参数获取当前表单输入的值
  */
+/* eslint-disable */
 import { FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
 import * as moment from 'moment';
 
 // 提示文
 const Remind = [
-    '长度限制1000个字符',
-    '请输入1-9位正整数'
+  '长度限制1000个字符',
+  '请输入1-9位正整数'
 ];
 
 interface LimitOptions {
-    start: string;
-    min: number;
-    max: number;
-    text: string;
-    caseInsensitive?: boolean;
+  start: string;
+  min: number;
+  max: number;
+  text: string;
+  caseInsensitive?: boolean;
 }
 /**
  * 去除前后空格
@@ -33,7 +34,7 @@ interface LimitOptions {
  * @returns string 返回去除前后空格的字符串
  */
 export function Trim(value: string): string {
-    return String(value).replace(/(^\s*)|(\s*$)/g, '');
+  return String(value).replace(/(^\s*)|(\s*$)/g, '');
 }
 
 /* ------------------ 数字类型验证 ------------------*/
@@ -47,9 +48,9 @@ export function Trim(value: string): string {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function mobileVerify(control: FormControl): any {
-    const REGEXP = /^(1[3|5|7|8|9]{1})+\d{9}$/;
-    const RESULT = REGEXP.test(control.value);
-    return RESULT ? null : { ErrorValue: { info: '手机号码格式不正确' } };
+  const REGEXP = /^(1[3|5|7|8|9]{1})+\d{9}$/;
+  const RESULT = REGEXP.test(control.value);
+  return RESULT ? null : { ErrorValue: { info: '手机号码格式不正确' } };
 }
 /**
  * 正整数 验证
@@ -59,9 +60,9 @@ export function mobileVerify(control: FormControl): any {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function numberVerify(control: FormControl): { [key: string]: any } | null {
-    const REGEXP = /^[1-9][0-9]{0,3}$/;
-    const RESULT = REGEXP.test(control.value);
-    return RESULT ? null : { ErrorValue: { info: '必须输入1-9999正整数' } };
+  const REGEXP = /^[1-9][0-9]{0,3}$/;
+  const RESULT = REGEXP.test(control.value);
+  return RESULT ? null : { ErrorValue: { info: '必须输入1-9999正整数' } };
 }
 
 /**
@@ -72,9 +73,9 @@ export function numberVerify(control: FormControl): { [key: string]: any } | nul
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function numVerify(control: FormControl): { [key: string]: any } | null {
-    const REGEXP = /^[0-9]*$/;
-    const RESULT = REGEXP.test(control.value);
-    return RESULT ? null : { ErrorValue: { info: '必须输入数字' } };
+  const REGEXP = /^[0-9]*$/;
+  const RESULT = REGEXP.test(control.value);
+  return RESULT ? null : { ErrorValue: { info: '必须输入数字' } };
 }
 /**
  * 固定位数数字 验证
@@ -87,11 +88,11 @@ export function numVerify(control: FormControl): { [key: string]: any } | null {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function numberFixedVerify(N: number, text: string): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const REGEXP = new RegExp('^[0-9]{' + Number(N) + '}$', 'g'); // 允许
-        const RESULT = REGEXP.test(control.value);
-        return RESULT ? null : { ErrorValue: { info: text } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const REGEXP = new RegExp('^[0-9]{' + Number(N) + '}$', 'g'); // 允许
+    const RESULT = REGEXP.test(control.value);
+    return RESULT ? null : { ErrorValue: { info: text } };
+  };
 }
 
 /**
@@ -105,21 +106,21 @@ export function numberFixedVerify(N: number, text: string): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function timeVerify(min?, text?, hour?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const date = +new Date();
-        const value = +new Date(control.value);
-        const TIME = value - date;
-        if (min || min === 0) {
-            const RESULT = TIME > min * 60 * 1000 ? true : false;
-            return RESULT ? null : { ErrorValue: { info: text ? text : `定时时间只能设置在当前时间${min}分钟之后` } };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const date = +new Date();
+    const value = +new Date(control.value);
+    const TIME = value - date;
+    if (min || min === 0) {
+      const RESULT = TIME > min * 60 * 1000 ? true : false;
+      return RESULT ? null : { ErrorValue: { info: text ? text : `定时时间只能设置在当前时间${min}分钟之后` } };
 
-        }
-        if (hour) {
-            const RESULT = TIME > hour * 60 * 60 * 1000 ? true : false;
-            return RESULT ? null : { ErrorValue: { info: text ? text : `申请时间只能设置在当前时间${hour}小时之后` } };
+    }
+    if (hour) {
+      const RESULT = TIME > hour * 60 * 60 * 1000 ? true : false;
+      return RESULT ? null : { ErrorValue: { info: text ? text : `申请时间只能设置在当前时间${hour}小时之后` } };
 
-        }
-    };
+    }
+  };
 }
 
 /**
@@ -129,14 +130,18 @@ export function timeVerify(min?, text?, hour?): ValidatorFn {
  * name: [empty, [timeEqualVerify.bind(this)]]
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
-export function timeEqualVerify(control: FormControl): { [key: string]: any } {
-    // return _Promise = new Promise (resolve => {
+export function timeEqualVerify(text?): { [key: string]: any } {
+  // return _Promise = new Promise (resolve => {
+  // eslint-disable-next-line
+  return (control: AbstractControl): { [key: string]: any } | null => {
     if (control) {
-        const begin = +new Date(control.value[0]);
-        const end = +new Date(control.value[1]);
-        return begin < end ? null : { ErrorValue: { info: `结束时间必须大于开始时间` } };
+      const begin = +new Date(control.value[0]);
+      const end = +new Date(control.value[1]);
+      // eslint-disable-next-line
+      return begin < end ? null : { ErrorValue: { info: text ? text : `结束时间必须大于开始时间` } };
     }
-    // });
+  };
+  // });
 }
 /**
  * 开始时间必须大于当前时间 - 异步验证
@@ -145,12 +150,14 @@ export function timeEqualVerify(control: FormControl): { [key: string]: any } {
  * name: [empty, [currentTimeEqualVerify.bind(this)]]
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
+// eslint-disable-next-line
 export function currentTimeEqualVerify(control: FormControl): { [key: string]: any } {
-    if (control) {
-        const begin = +new Date(control.value[0]);
-        const now = +new Date();
-        return begin > now ? null : { ErrorValue: { info: `开始时间必须大于当前时间` } };
-    }
+  if (control) {
+    const begin = +new Date(control.value[0]);
+    const now = +new Date();
+    // eslint-disable-next-line
+    return begin > now ? null : { ErrorValue: { info: `开始时间必须大于当前时间` } };
+  }
 }
 
 
@@ -164,20 +171,22 @@ export function currentTimeEqualVerify(control: FormControl): { [key: string]: a
  * name: [empty, [numberRangeVerify(40, string)]]
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
+// eslint-disable
 export function numberRangeVerify(max: number, text?, zero?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        let REGEXP;
-        if (zero === false) {
-            REGEXP = new RegExp('^[0-9]{0,' + Number(max) + '}$', 'g'); // 允许
-        } else {
-            REGEXP = new RegExp('^[1-9][0-9]{0,' + (Number(max) - 1) + '}$', 'g');
-        }
-        const RESULT = REGEXP.test(control.value);
-        if (typeof text === 'number') {
-            text = Remind[text];
-        }
-        return RESULT ? null : { ErrorValue: { info: text ? text : zero === false ? `至少输入1-${max}正整数，允许输入0` : `至少输入1-${max}正整数，不允许输入0` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    // eslint-disable-next-line
+    let REGEXP;
+    if (zero === false) {
+      REGEXP = new RegExp('^[0-9]{0,' + Number(max) + '}$', 'g'); // 允许
+    } else {
+      REGEXP = new RegExp('^[1-9][0-9]{0,' + (Number(max) - 1) + '}$', 'g');
+    }
+    const RESULT = REGEXP.test(control.value);
+    if (typeof text === 'number') {
+      text = Remind[text];
+    }
+    return RESULT ? null : { ErrorValue: { info: text ? text : zero === false ? `至少输入1-${max}正整数，允许输入0` : `至少输入1-${max}正整数，不允许输入0` } };
+  };
 }
 
 /**
@@ -188,9 +197,9 @@ export function numberRangeVerify(max: number, text?, zero?): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function sizeVerify(control: FormControl): { [key: string]: any } | null {
-    const REGEXP = /^(([1-9][0-9]*\.[0-9][0-9]{0})|([0]\.[0-9][0-9]{0})|([1-9][0-9]*)|([0]{1}))$/;
-    const RESULT = REGEXP.test(control.value);
-    return RESULT ? null : { ErrorValue: { info: '必须为正整数或保留一位小数的正数' } };
+  const REGEXP = /^(([1-9][0-9]*\.[0-9][0-9]{0})|([0]\.[0-9][0-9]{0})|([1-9][0-9]*)|([0]{1}))$/;
+  const RESULT = REGEXP.test(control.value);
+  return RESULT ? null : { ErrorValue: { info: '必须为正整数或保留一位小数的正数' } };
 }
 
 /**
@@ -201,14 +210,14 @@ export function sizeVerify(control: FormControl): { [key: string]: any } | null 
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function numSizeVerify(max: number, text?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const REGEXP = /^([0-9]|10)$/;
-        const RESULT = REGEXP.test(control.value);
-        if (typeof text === 'number') {
-            text = Remind[text];
-        }
-        return RESULT ? null : { ErrorValue: { info: text ? text : `至少输入1-${max}正整数，不允许输入0` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const REGEXP = /^([0-9]|10)$/;
+    const RESULT = REGEXP.test(control.value);
+    if (typeof text === 'number') {
+      text = Remind[text];
+    }
+    return RESULT ? null : { ErrorValue: { info: text ? text : `至少输入1-${max}正整数，不允许输入0` } };
+  };
 }
 /**
  * 金额验证
@@ -219,12 +228,14 @@ export function numSizeVerify(max: number, text?): ValidatorFn {
  * name: [empty, [priceVerify(6, string)]]
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
+// eslint-disable-next-line
 export function priceVerify(max: number = 4, text?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const REGEXP = new RegExp(/(^[1-9]([0-9]{0,5})(\.[0-9]{1,2})?$)|(^[0-9]{1}(\.[0-9]{1,2})?$)/);
-        const RESULT = REGEXP.test(control.value) && Number(control.value) > 0;
-        return RESULT ? null : { ErrorValue: { info: text ? text : `请录入正确的金额` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const REGEXP = new RegExp(/(^[1-9]([0-9]{0,5})(\.[0-9]{1,2})?$)|(^[0-9]{1}(\.[0-9]{1,2})?$)/);
+    const RESULT = REGEXP.test(control.value) && Number(control.value) > 0;
+    // eslint-disable-next-line
+    return RESULT ? null : { ErrorValue: { info: text ? text : `请录入正确的金额` } };
+  };
 }
 /**
  * 概率验证
@@ -235,12 +246,14 @@ export function priceVerify(max: number = 4, text?): ValidatorFn {
  * name: [empty, [priceVerify(6, string)]]
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
+// eslint-disable-next-line
 export function probabilityVerify(max: number = 100, text?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const REGEXP = new RegExp(/(^[1-9]([0-9]{0,2})(\.[0-9]{1,5})?$)|(^[0-9]{1}(\.[0-9]{1,5})?$)/);
-        const RESULT = REGEXP.test(control.value) && Number(control.value) > 0 && Number(control.value) <= max;
-        return RESULT ? null : { ErrorValue: { info: text ? text : `请输入0.0001-100之间的数值(%)` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const REGEXP = new RegExp(/(^[1-9]([0-9]{0,2})(\.[0-9]{1,5})?$)|(^[0-9]{1}(\.[0-9]{1,5})?$)/);
+    const RESULT = REGEXP.test(control.value) && Number(control.value) > 0 && Number(control.value) <= max;
+    // eslint-disable-next-line
+    return RESULT ? null : { ErrorValue: { info: text ? text : `请输入0.0001-100之间的数值(%)` } };
+  };
 }
 
 /* ------------------ 字符串类型验证 ------------------*/
@@ -250,6 +263,7 @@ export function probabilityVerify(max: number = 100, text?): ValidatorFn {
  * @param  number  min 最小长度
  * @param  number  max 最大长度
  * @param  string?  text 提示文本
+ * @param  unrequired?  boolean 是否非必填
  * @example
  * name: [empty, [rangeVerify(1, 20)]]
  * @example
@@ -257,18 +271,31 @@ export function probabilityVerify(max: number = 100, text?): ValidatorFn {
  * name: [empty, [rangeVerify(1, 20, string)]]
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
-export function rangeVerify(min: number, max: number, text?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        // const REGEXP = new RegExp('^.{' + min + ',' + max + '}$', 'gm');
-        // const RESULT = REGEXP.test(Trim(control.value));
-        // 处理textarea 标签时，用正则校验回车符出错，改用字符长度校验
-        const VALUE = Trim(control.value);
-        const RESULT = VALUE.length >= min && VALUE.length <= max;
+export function rangeVerify(min: number, max: number, text?, unrequired?): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    // const REGEXP = new RegExp('^.{' + min + ',' + max + '}$', 'gm');
+    // const RESULT = REGEXP.test(Trim(control.value));
+    // 处理textarea 标签时，用正则校验回车符出错，改用字符长度校验
+
+    const VALUE = Trim(control.value);
+    let RESULT;
+    if (unrequired) {
+      if (!VALUE) {
+        RESULT = true;
+      } else {
+        RESULT = VALUE.length >= min && VALUE.length <= max;
         if (typeof text === 'number') {
-            text = Remind[text];
+          text = Remind[text];
         }
-        return RESULT ? null : { min, max, ErrorValue: { info: text ? text : `至少输入${min}-${max}位` } };
-    };
+      }
+    } else {
+      RESULT = VALUE.length >= min && VALUE.length <= max;
+      if (typeof text === 'number') {
+        text = Remind[text];
+      }
+    }
+    return RESULT ? null : { min, max, ErrorValue: { info: text ? text : `至少输入${min}-${max}位` } };
+  };
 }
 /**
  * 以**开始并限制长度 验证
@@ -284,18 +311,19 @@ export function rangeVerify(min: number, max: number, text?): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function limitVerify(options: LimitOptions): ValidatorFn {
-    const START = options.start.split('|');
-    const LENGTH = START[0].length;
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        let VALUE = control.value.replace(/[\r\n\ +]/g, '');
-        if (options.caseInsensitive) {
-            options.start = options.start.toLowerCase();
-            VALUE = VALUE.toLowerCase();
-        }
-        const REGEXP = new RegExp('^(' + options.start + ').{' + (options.min - LENGTH) + ',' + (options.max - LENGTH) + '}$');
-        const RESULT = REGEXP.test(Trim(VALUE || control.value));
-        return RESULT ? null : { min: options.min, max: options.max, ErrorValue: { info: options.text } };
-    };
+  const START = options.start.split('|');
+  const LENGTH = START[0].length;
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    // eslint-disable-next-line
+    let VALUE = control.value.replace(/[\r\n\ +]/g, '');
+    if (options.caseInsensitive) {
+      options.start = options.start.toLowerCase();
+      VALUE = VALUE.toLowerCase();
+    }
+    const REGEXP = new RegExp('^(' + options.start + ').{' + (options.min - LENGTH) + ',' + (options.max - LENGTH) + '}$');
+    const RESULT = REGEXP.test(Trim(VALUE || control.value));
+    return RESULT ? null : { min: options.min, max: options.max, ErrorValue: { info: options.text } };
+  };
 }
 /**
  * 必填项为空 验证
@@ -313,15 +341,15 @@ export function limitVerify(options: LimitOptions): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function emptyVerify(text?: string, replace?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const REGEXP = new RegExp(/(^\s*)|(\s*$)/g, '');
-        let RESULT = REGEXP.test(control.value) && control.value !== null && control.value !== '';
-        if (Array.isArray(control.value)) {
-            RESULT = control.value.length > 0 ? true : false;
-        }
-        text = text || '';
-        return RESULT ? null : { ErrorValue: { info: replace ? `${text}` : `${text}不允许为空` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const REGEXP = new RegExp(/(^\s*)|(\s*$)/g, '');
+    let RESULT = REGEXP.test(control.value) && control.value !== null && control.value !== '';
+    if (Array.isArray(control.value)) {
+      RESULT = control.value.length > 0 ? true : false;
+    }
+    text = text || '';
+    return RESULT ? null : { ErrorValue: { info: replace ? `${text}` : `${text}不允许为空` } };
+  };
 }
 /**
  * 全选 验证
@@ -340,15 +368,15 @@ export function emptyVerify(text?: string, replace?): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function allCheckVerify(text?: string, len?: number, replace?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const REGEXP = new RegExp(/(^\s*)|(\s*$)/g, '');
-        let RESULT = REGEXP.test(control.value) && control.value !== null && control.value !== '';
-        if (Array.isArray(control.value)) {
-            RESULT = control.value.length > len - 1 ? true : false;
-        }
-        text = text || '';
-        return RESULT ? null : { ErrorValue: { info: replace ? `${text}` : `请勾选全部${text}选项` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const REGEXP = new RegExp(/(^\s*)|(\s*$)/g, '');
+    let RESULT = REGEXP.test(control.value) && control.value !== null && control.value !== '';
+    if (Array.isArray(control.value)) {
+      RESULT = control.value.length > len - 1 ? true : false;
+    }
+    text = text || '';
+    return RESULT ? null : { ErrorValue: { info: replace ? `${text}` : `请勾选全部${text}选项` } };
+  };
 }
 
 
@@ -365,17 +393,18 @@ export function allCheckVerify(text?: string, len?: number, replace?): Validator
 //     return RESULT ? null : { ErrorValue: { info: '不能包含数字' } };
 // }
 export function noNumberVerify(text?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const REGEXP = new RegExp(/\d+/);
-        let RESULT;
-        if (control.value !== '') {
-            RESULT = !REGEXP.test(Trim(control.value));
-        } else {
-            RESULT = true;
-        }
-        text = text || '';
-        return RESULT ? null : { ErrorValue: { info: `${text}` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const REGEXP = new RegExp(/\d+/);
+    // eslint-disable-next-line
+    let RESULT;
+    if (control.value !== '') {
+      RESULT = !REGEXP.test(Trim(control.value));
+    } else {
+      RESULT = true;
+    }
+    text = text || '';
+    return RESULT ? null : { ErrorValue: { info: `${text}` } };
+  };
 }
 
 /**
@@ -394,13 +423,13 @@ export function noNumberVerify(text?): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function lengthVerify(max?: number, min?: number): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const MAX = max || 1000;
-        const MIN = min || 1;
-        const REGEXP = new RegExp('^.{' + Number(MIN) + ',' + Number(MAX) + '}$', 'g');
-        const RESULT = REGEXP.test(control.value);
-        return RESULT ? null : { ErrorValue: { info: `长度限制${MAX}个字符` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const MAX = max || 1000;
+    const MIN = min || 1;
+    const REGEXP = new RegExp('^.{' + Number(MIN) + ',' + Number(MAX) + '}$', 'g');
+    const RESULT = REGEXP.test(control.value);
+    return RESULT ? null : { ErrorValue: { info: `长度限制${MAX}个字符` } };
+  };
 }
 
 /**
@@ -416,17 +445,19 @@ export function lengthVerify(max?: number, min?: number): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function noChineseVerify(text?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const REGEXP = new RegExp(/^((?![\u4e00-\u9fa5]).)+$/);
-        let RESULT;
-        if (control.value !== '') {
-            RESULT = REGEXP.test(Trim(control.value));
-        } else {
-            RESULT = true;
-        }
-        text = text || '';
-        return RESULT ? null : { ErrorValue: { info: text + '不允许输入中文' } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    // eslint-disable-next-line
+    const REGEXP = new RegExp(/^((?![\u4e00-\u9fa5]).)+$/);
+    // eslint-disable-next-line
+    let RESULT;
+    if (control.value !== '') {
+      RESULT = REGEXP.test(Trim(control.value));
+    } else {
+      RESULT = true;
+    }
+    text = text || '';
+    return RESULT ? null : { ErrorValue: { info: text + '不允许输入中文' } };
+  };
 }
 /* ------------------ 组合类型验证 ------------------*/
 /**
@@ -446,11 +477,11 @@ export function noChineseVerify(text?): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function characterVerify(text: string, max?, min?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const REGEXP = new RegExp('^[\u4E00-\u9FA5A-Za-z0-9_]{' + (min || 1) + ',' + (max || 1000) + '}$');
-        const RESULT = REGEXP.test(control.value);
-        return RESULT ? null : { ErrorValue: { info: `${text}` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const REGEXP = new RegExp('^[\u4E00-\u9FA5A-Za-z0-9_]{' + (min || 1) + ',' + (max || 1000) + '}$');
+    const RESULT = REGEXP.test(control.value);
+    return RESULT ? null : { ErrorValue: { info: `${text}` } };
+  };
 }
 /**
  * 由N位英文、数字组成
@@ -469,11 +500,11 @@ export function characterVerify(text: string, max?, min?): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function digitalEnVerify(text: string, max?, min?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const REGEXP = new RegExp('^[A-Za-z0-9]{' + (min || 1) + ',' + (max || 1000) + '}$');
-        const RESULT = REGEXP.test(control.value);
-        return RESULT ? null : { ErrorValue: { info: `${text}` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const REGEXP = new RegExp('^[A-Za-z0-9]{' + (min || 1) + ',' + (max || 1000) + '}$');
+    const RESULT = REGEXP.test(control.value);
+    return RESULT ? null : { ErrorValue: { info: `${text}` } };
+  };
 }
 /**
  * 版本号 验证
@@ -483,13 +514,13 @@ export function digitalEnVerify(text: string, max?, min?): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function versionVerify(control: FormControl): { [key: string]: any } | null {
-    const REGEXP = new RegExp(/^\d{1,3}\.\d{1,3}\.\d{1,3}$/);
-    let RESULT = REGEXP.test(control.value);
-    if (RESULT) {
-        const VALUE = control.value.split('.');
-        RESULT = (Number(VALUE[0]) + Number(VALUE[1]) + Number(VALUE[2])) > 0 ? true : false;
-    }
-    return RESULT ? null : { ErrorValue: { info: '请输入XXX.XXX.XXX格式' } };
+  const REGEXP = new RegExp(/^\d{1,3}\.\d{1,3}\.\d{1,3}$/);
+  let RESULT = REGEXP.test(control.value);
+  if (RESULT) {
+    const VALUE = control.value.split('.');
+    RESULT = (Number(VALUE[0]) + Number(VALUE[1]) + Number(VALUE[2])) > 0 ? true : false;
+  }
+  return RESULT ? null : { ErrorValue: { info: '请输入XXX.XXX.XXX格式' } };
 }
 /**
  * 标识 由数字、字母、下划线组成的字符串 验证
@@ -509,11 +540,11 @@ export function versionVerify(control: FormControl): { [key: string]: any } | nu
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function flagVerify(text: string, max?, min?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const REGEXP = new RegExp('^[0-9a-zA-Z_]{' + (min || 1) + ',' + (max || 1000) + '}$');
-        const RESULT = REGEXP.test(control.value);
-        return RESULT ? null : { ErrorValue: { info: `${text}` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const REGEXP = new RegExp('^[0-9a-zA-Z_]{' + (min || 1) + ',' + (max || 1000) + '}$');
+    const RESULT = REGEXP.test(control.value);
+    return RESULT ? null : { ErrorValue: { info: `${text}` } };
+  };
 }
 /**
  * 输入指定位数字母及汉字验证
@@ -527,13 +558,13 @@ export function flagVerify(text: string, max?, min?): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function wordVerify(text: string, max?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        const REGEXP = new RegExp('^[\u4E00-\u9FA5A-Za-z0-9_]{1,' + max + '}$');
-        const RESULT1 = REGEXP.test(control.value);
-        const RESULT2 = control.value.replace(/[^\x00-\xff]/g, 'aa').length <= max;
-        const RESULT = RESULT1 && RESULT2;
-        return RESULT ? null : { ErrorValue: { info: `${text}` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const REGEXP = new RegExp('^[\u4E00-\u9FA5A-Za-z0-9_]{1,' + max + '}$');
+    const RESULT1 = REGEXP.test(control.value);
+    const RESULT2 = control.value.replace(/[^\x00-\xff]/g, 'aa').length <= max;
+    const RESULT = RESULT1 && RESULT2;
+    return RESULT ? null : { ErrorValue: { info: `${text}` } };
+  };
 }
 /**
  * JSON 验证
@@ -548,19 +579,20 @@ export function wordVerify(text: string, max?): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function JSONVerify(status?: boolean): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        let RESULT;
-        try {
-            const OBJECT = JSON.parse(control.value);
-            RESULT = (typeof OBJECT === 'object' && OBJECT) ? true : false;
-        } catch (e) {
-            RESULT = false;
-        }
-        if (status && control.value === '') {
-            RESULT = true;
-        }
-        return RESULT ? null : { ErrorValue: { info: '内容不满足JSON格式' } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    // eslint-disable-next-line
+    let RESULT;
+    try {
+      const OBJECT = JSON.parse(control.value);
+      RESULT = (typeof OBJECT === 'object' && OBJECT) ? true : false;
+    } catch (e) {
+      RESULT = false;
+    }
+    if (status && control.value === '') {
+      RESULT = true;
+    }
+    return RESULT ? null : { ErrorValue: { info: '内容不满足JSON格式' } };
+  };
 }
 /**
  * URL 验证
@@ -575,14 +607,14 @@ export function JSONVerify(status?: boolean): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function urlVerify(status?: boolean): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        let RESULT;
-        // const REGEXP = new RegExp('(http[s]{0,1})://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]', 'i');
-        // const REGEXP = new RegExp('/^(https?:\/\/)([0-9a-z.]+)(:[0-9]+)?([/0-9a-z.]+)?(\?[0-9a-z&=]+)?(#[0-9-a-z]+)?/i', 'i');
-        const REGEXP = new RegExp('(http[s]{0,1})://', 'i');
-        RESULT = (status && control.value === '') ? true : REGEXP.test(control.value);
-        return RESULT ? null : { ErrorValue: { info: 'http://或https://' } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    // let RESULT;
+    // const REGEXP = new RegExp('(http[s]{0,1})://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]', 'i');
+    // const REGEXP = new RegExp('/^(https?:\/\/)([0-9a-z.]+)(:[0-9]+)?([/0-9a-z.]+)?(\?[0-9a-z&=]+)?(#[0-9-a-z]+)?/i', 'i');
+    const REGEXP = new RegExp('(http[s]{0,1})://', 'i');
+    const RESULT = (status && control.value === '') ? true : REGEXP.test(control.value);
+    return RESULT ? null : { ErrorValue: { info: 'http://或https://' } };
+  };
 }
 
 /**
@@ -593,9 +625,10 @@ export function urlVerify(status?: boolean): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function emailVerify(control: FormControl): { [key: string]: any } | null {
-    const REGEXP = new RegExp('^[A-Za-z0-9\u4e00-\u9fa5.]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$', 'i');
-    const RESULT = REGEXP.test(control.value);
-    return RESULT ? null : { ErrorValue: { info: '请填写正确的Email地址' } };
+  // eslint-disable-next-line
+  const REGEXP = new RegExp('^[A-Za-z0-9\u4e00-\u9fa5.]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$', 'i');
+  const RESULT = REGEXP.test(control.value);
+  return RESULT ? null : { ErrorValue: { info: '请填写正确的Email地址' } };
 }
 
 /* ------------------ 其他 ------------------*/
@@ -609,29 +642,32 @@ export function emailVerify(control: FormControl): { [key: string]: any } | null
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function customVerify(reg: RegExp, text: string, unRequired?, reverse?): ValidatorFn {
-    const verify = control => {
-      const REGEXP = new RegExp(reg);
-      if (reverse) {
-        return !REGEXP.test(control.value);
-      }
-
+  const verify = control => {
+    // eslint-disable-next-line
+    const REGEXP = new RegExp(reg);
+    if (reverse) {
+      return !REGEXP.test(control.value);
+      // eslint-disable-next-line
+    } else {
       return REGEXP.test(control.value);
-    };
+    }
+  };
 
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        let RESULT;
-        if (unRequired) {
-            if (!control.value) {
-                RESULT = true;
-            } else {
-                RESULT = verify(control);
-            }
-        } else {
-          RESULT = verify(control);
-        }
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    // eslint-disable-next-line
+    let RESULT;
+    if (unRequired) {
+      if (!control.value) {
+        RESULT = true;
+      } else {
+        RESULT = verify(control);
+      }
+    } else {
+      RESULT = verify(control);
+    }
 
-        return RESULT ? null : { ErrorValue: { info: `${text}` } };
-    };
+    return RESULT ? null : { ErrorValue: { info: `${text}` } };
+  };
 }
 /**
  * 颜色色值 验证
@@ -641,9 +677,9 @@ export function customVerify(reg: RegExp, text: string, unRequired?, reverse?): 
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function colorVerify(control: FormControl): { [key: string]: any } | null {
-    const REGEXP = new RegExp('^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$');
-    const RESULT = REGEXP.test(control.value);
-    return RESULT ? null : { ErrorValue: { info: '请填写正确的颜色色值' } };
+  const REGEXP = new RegExp('^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$');
+  const RESULT = REGEXP.test(control.value);
+  return RESULT ? null : { ErrorValue: { info: '请填写正确的颜色色值' } };
 
 }
 
@@ -655,16 +691,17 @@ export function colorVerify(control: FormControl): { [key: string]: any } | null
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function timeMonthVerify(day, text?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        if (control) {
-            const date = +new Date(control.value[0]);
-            const value = +new Date(control.value[1]);
-            const TIME = (value - date) / (1000 * 60 * 60 * 24);
-            // const TIME = (value - date);
-            const RESULT = TIME > day ? true : false;
-            return RESULT ? { ErrorValue: { info: text ? text : `搜索时间段跨度不允许超过${day}天` } } : null;
-        }
-    };
+  // eslint-disable-next-line
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    if (control) {
+      const date = +new Date(control.value[0]);
+      const value = +new Date(control.value[1]);
+      const TIME = (value - date) / (1000 * 60 * 60 * 24);
+      // const TIME = (value - date);
+      const RESULT = TIME > day ? true : false;
+      return RESULT ? { ErrorValue: { info: text ? text : `搜索时间段跨度不允许超过${day}天` } } : null;
+    }
+  };
 }
 
 /**
@@ -681,12 +718,12 @@ export function timeMonthVerify(day, text?): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function isCharacterVerify(text, status, info): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        let RESULT;
-        const REGEXP = new RegExp(`${text}+`, 'i');
-        RESULT = (!status && control.value !== '') ? true : REGEXP.test(control.value);
-        return RESULT ? null : { ErrorValue: { info: info ? info : `输入内容必须包括${text}` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const REGEXP = new RegExp(`${text}+`, 'i');
+
+    const RESULT = (!status && control.value !== '') ? true : REGEXP.test(control.value);
+    return RESULT ? null : { ErrorValue: { info: info ? info : `输入内容必须包括${text}` } };
+  };
 }
 
 /**
@@ -703,17 +740,17 @@ export function isCharacterVerify(text, status, info): ValidatorFn {
  * @returns null | { [key: string]: any }  验证通过返回null, 反之返回错误信息对象
  */
 export function quantityVerify(size, info?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        let RESULT;
-        let valueArr = [];
-        if (control.value !== '') {
-            valueArr = control.value.split(',');
-            valueArr = valueArr.filter(e => e);
-            valueArr = valueArr.filter(e => e.replace(/(\r\n|\n|\r)/gm, ''));
-            RESULT = valueArr.length > size;
-        }
-        return !RESULT ? null : { ErrorValue: { info: info ? info : `最多只能输入${size}个` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    let RESULT;
+    let valueArr = [];
+    if (control.value !== '') {
+      valueArr = control.value.split(',');
+      valueArr = valueArr.filter(e => e);
+      valueArr = valueArr.filter(e => e.replace(/(\r\n|\n|\r)/gm, ''));
+      RESULT = valueArr.length > size;
+    }
+    return !RESULT ? null : { ErrorValue: { info: info ? info : `最多只能输入${size}个` } };
+  };
 }
 
 
@@ -726,15 +763,47 @@ export function quantityVerify(size, info?): ValidatorFn {
  */
 
 export function endTimeVerify(limit, last, info?): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        let RESULT;
-        const deadlineDate = moment(new Date(moment(limit).format()).getTime() + last * 24 * 60 * 60 * 1000).format('YYYY-MM-DD');
-        if (control) {
-            const end = +new Date(control.value[1]);
-            console.log(limit, end);
-            const deadline = new Date(moment(limit).format()).getTime() + last * 24 * 60 * 60 * 1000;
-            RESULT = deadline > end;
-        }
-        return RESULT ? null : { ErrorValue: { info: info ? info : `结束日期需在${deadlineDate}前` } };
-    };
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    // eslint-disable-next-line
+    let RESULT;
+    const deadlineDate = moment(new Date(moment(limit).format()).getTime() + last * 24 * 60 * 60 * 1000).format('YYYY-MM-DD');
+    if (control) {
+      const end = +new Date(control.value[1]);
+      console.log(limit, end);
+      const deadline = new Date(moment(limit).format()).getTime() + last * 24 * 60 * 60 * 1000;
+      RESULT = deadline > end;
+    }
+    return RESULT ? null : { ErrorValue: { info: info ? info : `结束日期需在${deadlineDate}前` } };
+  };
+}
+/**
+ * 不支持特殊符号和表情
+ * @param text 错误文本
+ * @param replace 是否替换错误文本
+ * @returns
+ */
+export function specialCharacter(text?: string, replace?): ValidatorFn {
+  /* eslint-disable */
+  const REGEXP = new RegExp(/[\!！￥\#【】\~\`\@\$\%\^\&\*\(\)\_\-\+\=\{\}\[\]\;、；\'’‘\,，\<\>。\.\?\/·\?？《》\"]|(\ud83c[\udf00-\udfff])|(\ud83d[\udc00-\ude4f])|(\ud83d[\ude80-\udeff])/);
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const RESULT = !REGEXP.test(control.value);
+    text = text || '';
+    return RESULT ? null : { ErrorValue: { info: replace ? `${text}` : `不支持特殊符号和表情` } };
+  };
+}
+/**
+ * 日期起始时间小于结束时间的校验
+ * @param text 错误文本
+ * @param replace 是否替换错误文本
+ * @returns
+ */
+export function dateEndMoreThanStart(text?: string, replace?): ValidatorFn {
+
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const start = Number(new Date(control.value[0]));
+    const end = Number(new Date(control.value[1]));
+    const RESULT = start < end;
+    text = text || '';
+    return RESULT ? null : { ErrorValue: { info: replace ? `${text}` : `开始时间必须小于结束时间` } };
+  };
 }

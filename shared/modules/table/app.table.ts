@@ -32,7 +32,8 @@ export class AppTableComponent  implements OnInit {
    * 模板文件
    * @type {  Array<TemplateRef<any>> }
    */
-  @Input() template: TemplateRef<any>[];
+  @Input() template: Array<TemplateRef<any>>;
+  @Input() templateMore: TemplateRef<any>;
   // 滚动高度
   scrollY = 400;
   /**
@@ -117,8 +118,8 @@ export class AppTableComponent  implements OnInit {
    * @function colIndexLeft
    * @returns { String }
    */
-  get colIndexLeft(): string{
-    return 0 + (this.nzShowExpand ? 50 : 0) + (this.nzShowCheckbox ? 50 : 0 ) + 'px';
+  get colIndexLeft(): string {
+    return 0 + (this.nzShowExpand ? 50 : 0) + (this.nzShowCheckbox ? 50 : 0) + 'px';
   }
 
   /* ---------- 当前页码改变/页数改变 ---------- */
@@ -139,7 +140,7 @@ export class AppTableComponent  implements OnInit {
    * 表头对象
    * @type { Array<any> }
    */
-  @Input() columns: any[];
+  @Input() columns: Array<any>;
   /**
    * 列表总数
    * @type { Number }
@@ -187,10 +188,10 @@ export class AppTableComponent  implements OnInit {
    * @private
    */
   // tslint:disable-next-line: variable-name
-  private _nzData: any[] = [];
+  private _nzData: Array<any> = [];
   // 表格数据
   @Input()
-  set nzData(value: any[]) {
+  set nzData(value: Array<any>) {
     if (value) {
       const COLUMNS = this.columns;
       for (let i = 0; i < value.length; i++) {
@@ -232,7 +233,7 @@ export class AppTableComponent  implements OnInit {
       this._nzData = value;
     }
   }
-  get nzData(): any[] {
+  get nzData(): Array<any> {
     if (this._nzData.length === 0 && (this.nzTotal > this.nzPageSize) && (this.nzTotal / this.nzPageSize) <= (this.nzListIndex - 1)) {
       this.nzListIndex = (this.nzListIndex - 1);
       this.pageIndexChange();
@@ -275,13 +276,16 @@ export class AppTableComponent  implements OnInit {
   @Input()
   set nzChildren(value: Children) {
     if (value) {
-      value.data.forEach( (item, index) => {
-        this.columns.forEach( (colItem, colIndex) => {
+      value.data.forEach((item, index) => {
+        this.columns.forEach((colItem, colIndex) => {
           // 逻辑运算并返回结果
           if (colItem.logic) {
             // tslint:disable-next-line: max-line-length
-            item[`VALUE-${colItem.key}`] = colItem.logic(item, this.count(index - this.nzPageIndex), item[colItem.key],
-            this.nzData[this._nzParentIndex]['VALUE-index']);
+            // eslint-disable
+            item[`VALUE-${colItem.key}`] = colItem.logic(item,
+              this.count(index - this.nzPageIndex), item[colItem.key],
+              this.nzData[this._nzParentIndex]['VALUE-index']);
+            // eslint-disable-next-line
             item[`VALUE-ParentIndex`] = this._nzParentIndex + 1 + this.nzPageIndex;
           }
           // html模板文件解析
@@ -315,7 +319,6 @@ export class AppTableComponent  implements OnInit {
    * @private
    */
   private allChecked = false;
-  private allDisabled = false;
   /**
    * 选择样式触发状态
    * @type { Boolean }
@@ -348,6 +351,8 @@ export class AppTableComponent  implements OnInit {
   popoverVisible = false;
   // 是否切换页码，如果是的话，不触发排序函数
   isPageChange = false;
+  //
+  moreList;
   /**
    * 提升性能
    * @function trackByFn
@@ -388,7 +393,7 @@ export class AppTableComponent  implements OnInit {
    */
   private warn(name, text): string {
     name = name || '';
-    return `确认要${text} "${name.length > 20 ? name.substring(0, 20) + '...' : name }" 吗?`;
+    return `确认要${text} "${name.length > 20 ? name.substring(0, 20) + '...' : name}" 吗?`;
   }
   /**
    * 计算table高度
@@ -424,6 +429,9 @@ export class AppTableComponent  implements OnInit {
       }, 100);
     }
   }
+  click(trItme, type): void {
+    console.log(trItme, type);
+    // this.moreList = trItme
 
   /**
    * 计算列表数据索引
@@ -524,15 +532,12 @@ export class AppTableComponent  implements OnInit {
    * @function checkedChange
    * @private
    */
-  private checkedChange(): void  {
+  private checkedChange(): void {
     const allChecked = this.displayData.filter((value) =>
       value.checked
     );
     this.refreshStatus();
     this.nzPageCheckChange.emit(allChecked);
-    const allDisabled = this.displayData.filter((value) =>
-      value.disabled
-    );
   }
 
   /**
@@ -555,13 +560,11 @@ export class AppTableComponent  implements OnInit {
    * @private
    */
   private refreshStatus(): void {
-    const CHECKED = this.displayData.filter(value => !value.disabled);
-    if (CHECKED.length) {
-      const ALL_CHECKED = CHECKED.every(value => value.checked === true);
-      this.allChecked = ALL_CHECKED;
-      const ALL_UNCHECKED = CHECKED.every(value => !value.checked);
-      this.indeterminate = (!ALL_CHECKED) && (!ALL_UNCHECKED);
-    }
+    const ALL_CHECKED = this.displayData.filter(value => !value.disabled).length ?
+      this.displayData.filter(value => !value.disabled).every(value => value.checked === true) : false;
+    const ALL_UNCHECKED = this.displayData.filter(value => !value.disabled).every(value => !value.checked);
+    this.allChecked = ALL_CHECKED;
+    this.indeterminate = (!ALL_CHECKED) && (!ALL_UNCHECKED);
   }
   /**
    * 展开列表触发回调
@@ -590,9 +593,10 @@ export class AppTableComponent  implements OnInit {
   private evaluation(trItme, colItme, Sub?): string  {
     if (Sub && trItme['VALUE-index'] && colItme.key === 'index') {
       return trItme['VALUE-ParentIndex'] + '-' + trItme['VALUE-index'];
+      // eslint-disable-next-line
+    } else {
+      return trItme['VALUE-' + colItme.key];
     }
-
-    return trItme['VALUE-' + colItme.key];
   }
   /**
    * 匹配值计算

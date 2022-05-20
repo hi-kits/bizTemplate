@@ -4,7 +4,7 @@ import { NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder } f
 interface Obj {
     [x: string]: any;
 }
-type OperationType = 'delete' | 'sub' | 'switch' | 'popover' | 'match' | 'remind' | 'custom';
+type OperationType = 'delete' | 'sub' | 'switch' | 'popover' | 'match' | 'remind' | 'custom' | 'more';
 
 interface OperationS {
     /**  名称 */
@@ -22,6 +22,7 @@ interface OperationS {
      * @match 匹配某个值是否存在
      * @remind 提醒方式
      * @custom 自定义 - 暂时无效
+     * @more 更多
     */
     type?: OperationType;
     /** 逻辑运算
@@ -58,7 +59,11 @@ interface OperationS {
      * @ type 为 'switch' / 'remind' 必须
     */
     value?: string;
-    /**
+    /** 
+     * @ type 为 'more' 必须
+    */
+    // item?: Array<any>;
+    /** 
      * @ record 当前操作的对象
      * @ type 为 'remind' 时value和message必须且只能选一个
     */

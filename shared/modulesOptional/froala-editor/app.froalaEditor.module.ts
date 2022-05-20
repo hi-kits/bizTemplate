@@ -7,7 +7,7 @@ import { FroalaEditorComponent } from './froalaEditor.component';
 import { APPCropperComponent } from './cropper/app.cropper.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 /* 富文本 */
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { FroalaEditorModule, FroalaViewModule } from 'hi-angular-froala-wysiwyg';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 @NgModule({

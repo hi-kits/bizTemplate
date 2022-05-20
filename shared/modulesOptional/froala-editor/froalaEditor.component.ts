@@ -1,7 +1,9 @@
+/* eslint-disable */
+/* tslint-disable */
 import { Component, OnInit, Input, Output, EventEmitter, NgZone, OnDestroy } from '@angular/core';
 import { AppModuleOptionalParameter } from '@shared/modulesOptional/app.modulesOptional.parameter';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import FroalaEditor from 'froala-editor';
+import FroalaEditor from 'hi-froala-editor';
 // 用户信息
 import { AppParam } from '@user';
 import { getUrlParams } from '@mid/browser/getUrlParams';
@@ -23,6 +25,9 @@ import './lib/js/plugins/paragraph_format.min.js';
 import './lib/js/plugins/quote.min.js';
 import './lib/js/plugins/line_height.min.js';
 import './lib/js/third_party/embedly.min.js';
+import './lib/js/plugins/edit_in_popup.min';
+import './lib/js/plugins/font_size.min';
+import './lib/js/plugins/colors.min';
 
 import './lib/js/languages/zh_cn.js';
 import './lib/js/plugins/image.min.js';
@@ -43,6 +48,7 @@ let myFroalaEditor;
 })
 
 export class FroalaEditorComponent implements OnInit, OnDestroy {
+  @Input() customOptions = {};
   // 文件类型限制
   FILE_TYPE = {
     image: ['gif', 'png', 'bmp', 'jpg', 'jpeg'],
@@ -123,7 +129,7 @@ export class FroalaEditorComponent implements OnInit, OnDestroy {
       linkAutoPrefix: '',
       // 最大输入数
       charCounterMax: 20000,
-      // 注意导航条的配置, 按照官方的文档,无法配置,使用toolbarButtons来配置了。
+      // 注意导航条的配置, 按照官方的文档,无法配置, s使用toolbarButtons来配置了。
       toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'quote', 'paragraphFormat', 'formatOLSimple', 'formatUL',
         'subscript', 'superscript', 'fontSize', 'textColor', 'backgroundColor', 'insertFiles', 'insertImage', 'insertVideo', 'lineHeight', 'outdent', 'indent', 'insertLink', 'align', 'clearFormatting', 'undo', 'redo'],
       // 文件管理 - 类型
@@ -217,7 +223,7 @@ export class FroalaEditorComponent implements OnInit, OnDestroy {
       // Enables list advanced types for the bullets.
       listAdvancedTypes: true,
       // 插件
-      pluginsEnabled: ['align', 'charCounter', 'draggable', 'image', 'link', 'lists', 'quote', 'video', 'embedly', 'paragraphFormat', 'lineHeight', 'filesManager'
+      pluginsEnabled: ['align', 'charCounter', 'draggable', 'image', 'link', 'lists', 'quote', 'video', 'embedly', 'paragraphFormat', 'lineHeight', 'filesManager', 'colors', 'fontSize'
       ],
       events: {
         // 当点击视频按钮时
@@ -302,7 +308,8 @@ export class FroalaEditorComponent implements OnInit, OnDestroy {
           }
           return JSON.stringify(response);
         }
-      }
+      },
+      ...this.customOptions
     };
 
   }
@@ -414,7 +421,7 @@ export class FroalaEditorComponent implements OnInit, OnDestroy {
       };
     } else {
       this.UPLOAD_URL = {
-        image: (environment.origin ? environment.paths.SERVER_URL_SYN + 'plugins/syn/' : environment.paths.SERVER_URL + 'plugins/') + 'fileUpload/pictureUpload' ? '' : '',
+        image: (environment.origin ? environment.paths.SERVER_URL_SYN + 'plugins/syn/' : environment.paths.SERVER_URL + 'plugins/') + 'fileUpload/pictureUpload',
         video: (environment.origin ? environment.paths.SERVER_URL_SYN + 'plugins/syn/' : environment.paths.SERVER_URL + 'plugins/') + 'fileUpload/videoUpload',
         files: (environment.origin ? environment.paths.SERVER_URL_SYN + 'plugins/syn/' : environment.paths.SERVER_URL + 'plugins/') + 'fileUpload/docUpload',
       };

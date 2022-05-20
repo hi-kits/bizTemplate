@@ -10,6 +10,18 @@
  *      `ng build --env=prod` 会使用 `environment.prod.ts` 来替代
  *      该环境映射的列表，可以在 `.angular-cli.json` 中找到
  */
+
+// 本地测试窗口协议更改
+// const PROTOCOL =  'http:';
+const PROTOCOL =  'https:';
+// 验收地址
+const YANSHOU = '//zj-yanshou.haier.net';
+
+// 运营平台域名
+const ORIGIN = PROTOCOL + YANSHOU ;
+
+
+
 export const environment = {
   // 本地测试环境  文件路径
   publicBase: '/',
@@ -37,17 +49,26 @@ export const environment = {
   hmr: false,
   /** 本地测试环境  接口路径 */
   paths: {
+    // 老接口域名
     SERVER_URL_OLD: 'https://zj.haier.net/',
     SERVER_URL_NO_GATEWAY: window.location.protocol + '//zj-yanshou.haier.net/',
     SERVER_URL:  window.location.protocol + '//zj-yanshou.haier.net/zjm/',
     SERVER_URL_SYN: window.location.protocol + '//zj-yanshou.haier.net/zjm/syn/',
     // 三翼鸟接口域名-内容平台
-    SERVER_URL_SYN1: window.location.protocol + '//zj-yanshou.haier.net/zjm/',
-    SERVER_URL_SCORD: 'https://uhome-sea.haieriot.net/',
-    SERVER_URL_NEBULA: 'https://zj-yanshou.haier.net/nebula/',
-    SERVER_URL_ONESTOP: 'http://zj-yanshou.haier.net/synms/upm/',
-    SERVER_URL_MONITOR: 'http://zj-yanshou.haier.net/synms/',
-    SERVER_URL_NEBULA_GW: 'https://zj-yanshou.haier.net/nebula-gw/',
-    SERVER_URL_PERFA: 'http://zj-yanshou.haier.net/synms/synlog/crash/',
+    SERVER_URL_SYN1: ORIGIN + '/zjm/',
+    // 东南亚接口域名
+    SERVER_URL_SCORD:  PROTOCOL + 'uhome-sea.haieriot.net/',
+    // 星月系统接口域名
+    SERVER_URL_NEBULA: ORIGIN + '/nebula/',
+    // 一站式发布平台接口
+    SERVER_URL_ONESTOP: ORIGIN + '/synms/upm/',
+    // 一站式发布平台接口-多维监控.崩溃日志
+    SERVER_URL_MONITOR: ORIGIN + '/synms/',
+    // 星云系统-内容发布接口域名
+    SERVER_URL_NEBULA_GW: ORIGIN + '/nebula-gw/',
+    // 中台-搜索
+    SERVER_URL_MPS_GW: ORIGIN +  '/mps-gw/',
+    // 崩溃日志接口地址
+    SERVER_URL_PERFA: ORIGIN +  '/synms/synlog/crash/',
   },
 };
