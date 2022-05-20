@@ -17,6 +17,8 @@ import { environment } from '@env/environment';
 import { HttpOption } from '@int/types';
 // 消息
 import { Message } from '@shared/modulesOptional/message/app.message';
+// HttpRequest
+import { HttpRequest } from '@angular/common/http';
 
 export type GetName = 'listQuery' | 'thumbnailUrl';
 export type SetName = 'start' | 'audit';
@@ -37,6 +39,17 @@ export class ViewAction {
         }, (error) => {
             this.message.warning(error.result.message);
         });
+    }
+
+    private interceptorCallback(req: HttpRequest<any>, HEADERS) {
+        // do something
+        if (req['urlType'] === 'exportWithXToken' && window.localStorage.getItem(window.parent.location.pathname + 'pro__Access-Token')) {
+                HEADERS = {
+                  ...HEADERS,
+                  'X-Access-Token': JSON.parse(window.localStorage.getItem(window.parent.location.pathname + 'pro__Access-Token'))?.value};
+        }
+        HEADERS = {}
+        return HEADERS;
     }
 
     // 获取数据
@@ -83,7 +96,8 @@ export class ViewAction {
             httpBody: HTTP_BODY,
             callback: callback || (() => {}),
             error: error || (() => {}),
-            isIgnore
+            isIgnore,
+            interceptorCallback: this.interceptorCallback
         });
     }
 
@@ -115,7 +129,8 @@ export class ViewAction {
             httpBody: HTTP_BODY,
             callback: callback || (() => {}),
             error: error || (() => {}),
-            isIgnore
+            isIgnore,
+            interceptorCallback: this.interceptorCallback
         });
     }
 
