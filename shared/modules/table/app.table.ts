@@ -432,7 +432,7 @@ export class AppTableComponent  implements OnInit {
   click(trItme, type): void {
     console.log(trItme, type);
     // this.moreList = trItme
-
+  }
   /**
    * 计算列表数据索引
    * @function count
