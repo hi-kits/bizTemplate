@@ -7,13 +7,21 @@
  */
 export class Scroll {
   private to(Element, options: { left, top, duration, easing}, callback?: () => void): void {
+    /* eslint-disable */
     let currentTop;
+    /* eslint-disable */
     let currentLeft;
+    /* eslint-disable */
     let maxTop;
+    /* eslint-disable */
     let maxLeft;
+    /* eslint-disable */
     let newTop;
+    /* eslint-disable */
     let newLeft;
+    /* eslint-disable */
     let scrollTop;
+    /* eslint-disable */
     let scrollLeft;
     let animateTop = options.top > 0 || options.top === 0;
     let animateLeft = options.left > 0 || options.left === 0;
@@ -47,6 +55,7 @@ export class Scroll {
     if (animateTop && newTop === currentTop) { animateTop = false; }
     if (animateLeft && newLeft === currentLeft) { animateLeft = false; }
     // tslint:disable-next-line:cyclomatic-complexity
+    /* eslint-disable */
     const render = (time) => {
       if (time === undefined) {
         // tslint:disable-next-line:no-parameter-reassignment
@@ -55,6 +64,7 @@ export class Scroll {
       if (startTime === null) {
         startTime = time;
       }
+      /* eslint-disable */
       let done;
       const progress = Math.max(Math.min((time - startTime) / options.duration, 1), 0);
       const easeProgress = options.easing === 'linear' ? progress : (0.5 - Math.cos(progress * Math.PI) / 2);

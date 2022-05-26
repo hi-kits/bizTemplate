@@ -16,12 +16,12 @@ import { Color, ColorPickerControl, ColorsTable } from '@iplab/ngx-color-picker'
   templateUrl: './app.colorPickers.component.html',
   styleUrls: ['./app.colorPickers.component.css'],
 })
-export class APPColorPickersComponent  implements OnInit {
+export class APPColorPickersComponent implements OnInit {
   /* ---------- 显示属性 ---------- */
   public colorControl = new ColorPickerControl()
-  .setValueFrom(ColorsTable.aquamarine)
-  .hidePresets()
-  .hideAlphaChannel();
+    .setValueFrom(ColorsTable.aquamarine)
+    .hidePresets()
+    .hideAlphaChannel();
   // 当 colorPickers 的值发生改变时，会触发 ngModelChange 事件，并把改变后的值作为参数传入。
   @Output() ngModelChange: EventEmitter<any> = new EventEmitter();
 
@@ -45,21 +45,21 @@ export class APPColorPickersComponent  implements OnInit {
   }
 
   ngOnInit(): void {
-      this.colorControl.valueChanges.subscribe((value: Color) => this.colorChange.emit(value.toHexString()));
+    this.colorControl.valueChanges.subscribe((value: Color) => this.colorChange.emit(value.toHexString()));
   }
 
   @HostListener('click', ['$event']) public showColorPicker(event: MouseEvent): void {
-      if (this.isVisible === true) {
-          return;
-      }
-      // this.ngModelChange.emit(color);
-      this.isVisible = !this.isVisible;
+    if (this.isVisible === true) {
+      return;
+    }
+    // this.ngModelChange.emit(color);
+    this.isVisible = !this.isVisible;
   }
 
   public overlayClick(event: MouseEvent): void {
-      event.preventDefault();
-      event.stopPropagation();
-      this.isVisible = true;
+    event.preventDefault();
+    event.stopPropagation();
+    this.isVisible = true;
   }
 
 }

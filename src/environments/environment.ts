@@ -51,14 +51,18 @@ export const environment = {
   paths: {
     // 老接口域名
     SERVER_URL_OLD: 'https://zj.haier.net/',
-    SERVER_URL_NO_GATEWAY: window.location.protocol + '//zj-yanshou.haier.net/',
-    SERVER_URL:  window.location.protocol + '//zj-yanshou.haier.net/zjm/',
-    SERVER_URL_SYN: window.location.protocol + '//zj-yanshou.haier.net/zjm/syn/',
+    // SERVER_URL_OLD: ORIGIN + '/',
+    // 无网关接口域名
+    SERVER_URL_NO_GATEWAY: ORIGIN + '/',
+    // 接口域名
+    SERVER_URL: ORIGIN + '/zjm/',
+    // 三翼鸟接口域名
+    SERVER_URL_SYN: ORIGIN + '/zjm/syn/',
     // 三翼鸟接口域名-内容平台
     SERVER_URL_SYN1: ORIGIN + '/zjm/',
     // 东南亚接口域名
     SERVER_URL_SCORD:  PROTOCOL + 'uhome-sea.haieriot.net/',
-    // 星月系统接口域名
+    // 星云系统接口域名
     SERVER_URL_NEBULA: ORIGIN + '/nebula/',
     // 一站式发布平台接口
     SERVER_URL_ONESTOP: ORIGIN + '/synms/upm/',

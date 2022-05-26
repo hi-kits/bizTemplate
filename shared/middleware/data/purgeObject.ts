@@ -10,21 +10,23 @@
  */
 
 export function Purge(Obj: object, value: string | any[]): object {
-    if (Object.prototype.toString.call(value) === '[object String]') {
-        // tslint:disable-next-line:no-parameter-reassignment
-        value = [value];
+  if (Object.prototype.toString.call(value) === '[object String]') {
+    // tslint:disable-next-line:no-parameter-reassignment
+    value = [value];
+  }
+  // tslint:disable-next-line: forin
+  /* eslint-disable */
+  for (const key in Obj) {
+    /* eslint-disable */
+    if (Obj.hasOwnProperty(key)) {
+      if (value.includes(Obj[key])) {
+        delete Obj[key];
+      }
     }
-    // tslint:disable-next-line: forin
-    for (const key in Obj) {
-        if (Obj.hasOwnProperty(key)) {
-            if (value.includes(Obj[key])) {
-                delete Obj[key];
-            }
-        }
-        if (Object.prototype.toString.call(Obj[key]) === '[object Object]') {
-            Purge(Obj[key], value);
-        }
+    if (Object.prototype.toString.call(Obj[key]) === '[object Object]') {
+      Purge(Obj[key], value);
     }
-    return Obj;
+  }
+  return Obj;
 }
 

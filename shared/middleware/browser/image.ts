@@ -8,25 +8,25 @@
  * 2019/06/14 添加可选回调函数 callback?
  */
 export class Picture {
-    // 转换格式
-    getBase64(img): string {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, img.width, img.height);
-        const dataURL = canvas.toDataURL('image/png');  // 可选其他值 image/jpeg
-        return dataURL;
-    }
-    // 转换
-    convert(src, callback): void{
-        const image = new Image();
-        image.crossOrigin = '*';  // 必须在image之前赋值
-        image.src = src + '?v=' + Math.random(); // 处理缓存
-        image.onload = () => {
-            const base64 = this.getBase64(image);
-            callback(base64);
-        };
-    }
+  // 转换格式
+  getBase64(img): string {
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, img.width, img.height);
+    const dataURL = canvas.toDataURL('image/png');  // 可选其他值 image/jpeg
+    return dataURL;
+  }
+  // 转换
+  convert(src, callback): void{
+    const image = new Image();
+    image.crossOrigin = '*';  // 必须在image之前赋值
+    image.src = src + '?v=' + Math.random(); // 处理缓存
+    image.onload = () => {
+      const base64 = this.getBase64(image);
+      callback(base64);
+    };
+  }
 }
 

@@ -14,14 +14,19 @@
 const YANSHOU = '//zj-yanshou.haier.net';
 // 生产地址
 const SHENGCHAN = '//zj.haier.net';
-// 三翼鸟域名
-const ORIGIN_SYN = window.location.protocol + (window.location.origin.indexOf('ys-zjrs') > -1 ? YANSHOU : '//syn.haier.net');
 // 是否是预发域名
 const RELEASE = window.location.href.indexOf('haier.net/release') > -1;
+// 三翼鸟域名
+/* eslint-disable */
+const ORIGIN_SYN = window.location.protocol + (window.location.origin.indexOf('ys-zjrs') > -1 ? YANSHOU : !RELEASE ? '//syn.haier.net' : '//zj-pre-release.haier.net');
+var MPS_URL = window.location.protocol + '//mps.haiersmarthomes.com';
 // 运营平台域名
-const ORIGIN = window.location.protocol + (window.location.origin.indexOf('ys-zjrs') > -1 ?
-  YANSHOU : !RELEASE ? SHENGCHAN : '//zj-pre-release.haier.net');
+/* eslint-disable */
+const ORIGIN = window.location.protocol + (window.location.origin.indexOf('ys-zjrs') > -1 ? YANSHOU : !RELEASE ? SHENGCHAN : '//zj-pre-release.haier.net');
 window['PATHS'] = window['PATHS'] || {};
+// 智家内容发布平台
+/* eslint-disable */
+var CON_ORIGIN = window.location.protocol + (window.location.origin.indexOf('ys-zjrs') > -1 ? '//syntest.haier.net' : !RELEASE ? '//syn.haier.net' : '//zj-pre-release.haier.net');
 export const environment = {
   publicBase: '/',
   production: true,
@@ -63,13 +68,19 @@ export const environment = {
     SERVER_URL_NEBULA: window['PATHS'].SERVER_URL_NEBULA || ORIGIN_SYN + '/nebula/',
     // 星云系统-内容发布接口域名
     SERVER_URL_NEBULA_GW: window.location.origin.indexOf('ys-zjrs') > -1 ? window['PATHS'].SERVER_URL_NEBULA_GW : ORIGIN_SYN + '/nebula-gw/',
+    // 中台-搜索
+    SERVER_URL_MPS_GW: window.location.origin.indexOf('ys-zjrs') > -1 ? window['PATHS'].SERVER_URL_MPS_GW : MPS_URL + '/mps-gw/',
     // 一站式发布平台接口
     SERVER_URL_ONESTOP: window['PATHS'].SERVER_URL_ONESTOP || ORIGIN + '/synms/upm/',
     // 崩溃日志接口地址
     SERVER_URL_PERFA: window['PATHS'].SERVER_URL_PERFA || ORIGIN + '/synms/synlog/crash/',
     // 一站式发布平台接口-多维监控.崩溃日志
-    SERVER_URL_MONITOR: window['PATHS'].SERVER_URL_MONITOR || ORIGIN + '/synms/'
-
+    SERVER_URL_MONITOR: window['PATHS'].SERVER_URL_MONITOR || ORIGIN + '/synms/',
+    /*----------- 内容发布 ----------*/
+    // 内容发布平台接口-三翼鸟
+    CON_SYN_SERVER_URL: CON_ORIGIN,
+    // 内容发布平台-智家
+    CON_SERVER_URL: ORIGIN,
   },
 };
 

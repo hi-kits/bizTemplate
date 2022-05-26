@@ -19,38 +19,38 @@ import { ColorPickerModule } from '@iplab/ngx-color-picker';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const Component = [
-    APPColorPickersComponent,
+  APPColorPickersComponent,
 ];
 
 @NgModule({
-    // 本模块声明的组件模板需要的类所在的其它模块。
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        ColorPickerModule,
-        // BrowserAnimationsModule
-        // ANTDCOMMONMODULES
-    ],
-    // 声明本模块中拥有的视图类。Angular 有三种视图类：组件、指令和管道。
-    // 这里引入共享的组件
-    declarations: [
-        ...Component,
-    ],
-    entryComponents: [...Component],
-    // 这里将共享的组件放入到导出的出口中
-    exports: [
-        CommonModule,
-        // NzButtonModule,
-        ...Component
-    ],
-        // 自定义html元素
-    schemas: [],
+  // 本模块声明的组件模板需要的类所在的其它模块。
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ColorPickerModule,
+    // BrowserAnimationsModule
+    // ANTDCOMMONMODULES
+  ],
+  // 声明本模块中拥有的视图类。Angular 有三种视图类：组件、指令和管道。
+  // 这里引入共享的组件
+  declarations: [
+    ...Component,
+  ],
+  entryComponents: [...Component],
+  // 这里将共享的组件放入到导出的出口中
+  exports: [
+    CommonModule,
+    // NzButtonModule,
+    ...Component
+  ],
+  // 自定义html元素
+  schemas: [],
 
-    // 服务的创建者，并加入到全局服务列表中，可用于应用任何部分。
-    providers: [
-    ],
+  // 服务的创建者，并加入到全局服务列表中，可用于应用任何部分。
+  providers: [
+  ],
 
 })
-export class ColorPickersModule {}
+export class ColorPickersModule { }
 

@@ -23,38 +23,41 @@ interface OptionsValue {
 }
 
 export function getUrlParams(options?: OptionsValue): {} {
-    // tslint:disable-next-line:no-parameter-reassignment
-    options = options || {};
-    const RESULT_DATA = {};
-    const LINK_URL = options.url ? options.url : window.location.href;
-    const MARK = LINK_URL.indexOf('?') + 1;
-    let URL_DATA = LINK_URL.substring(MARK);
-    if (MARK !== 0) {
-        if (!!options.type) {
-            const TYPE_DATA = URL_DATA.indexOf(options.type[0]) + options.type[0].length;
-            RESULT_DATA[options.type[1]] = URL_DATA.substring(TYPE_DATA);
-        } else {
-            // angular #/ 多问号 特殊处理
-            URL_DATA = URL_DATA.replace(/%26/gi, '&').
-            replace(/%2F/gi, '/').
-            replace(/%3D/gi, '=').
-            replace(/%2B/gi, '+').
-            replace(/%40/gi, '@').
-            replace(/%3A/gi, ':').
-            replace(/%24/g, '$').
-            replace(/%2C/gi, ',').
-            replace(/%3B/gi, ';').
-            replace(/%20/g, ' ').
-            replace(/\?/g, '&').
-            replace(/\#\//g, '&').
-            replace(/\&&/g, '&');
-            // 获取参数的值
-            const DATA = URL_DATA.split('&');
-            for (const value of DATA) {
-                const ARRAY = value.split('=');
-                RESULT_DATA[ARRAY[0]] = ARRAY[1];
-            }
-        }
+  // tslint:disable-next-line:no-parameter-reassignment
+  options = options || {};
+  const RESULT_DATA = {};
+  const LINK_URL = options.url ? options.url : window.location.href;
+  const MARK = LINK_URL.indexOf('?') + 1;
+  let URL_DATA = LINK_URL.substring(MARK);
+  if (MARK !== 0) {
+    /* eslint-disable */
+    if (!!options.type) {
+      const TYPE_DATA = URL_DATA.indexOf(options.type[0]) + options.type[0].length;
+      RESULT_DATA[options.type[1]] = URL_DATA.substring(TYPE_DATA);
+    } else {
+      // angular #/ 多问号 特殊处理
+      URL_DATA = URL_DATA.replace(/%26/gi, '&')
+      .replace(/%2F/gi, '/')
+      .replace(/%3D/gi, '=')
+      .replace(/%2B/gi, '+')
+      .replace(/%40/gi, '@')
+      .replace(/%3A/gi, ':')
+      .replace(/%24/g, '$')
+      .replace(/%2C/gi, ',')
+      .replace(/%3B/gi, ';')
+      .replace(/%20/g, ' ')
+      .replace(/\?/g, '&')
+      /* eslint-disable */
+      .replace(/\#\//g, '&')
+      /* eslint-disable */
+      .replace(/\&&/g, '&');
+      // 获取参数的值
+      const DATA = URL_DATA.split('&');
+      for (const value of DATA) {
+        const ARRAY = value.split('=');
+        RESULT_DATA[ARRAY[0]] = ARRAY[1];
+      }
     }
-    return RESULT_DATA;
+  }
+  return RESULT_DATA;
 }

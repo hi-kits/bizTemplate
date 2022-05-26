@@ -6,13 +6,15 @@
  * @Copyright © 2019 海尔优家智能科技（北京）有限公司. All rights reserved.
  */
 export function once(liveEvent): () => any {
-    let RESULT;
-    // tslint:disable-next-line: typedef
-    return function() {
-        if (liveEvent) {
-            RESULT = liveEvent.apply(this, arguments);
-            liveEvent = null;
-        }
-        return RESULT;
-    };
+  /* eslint-disable */
+  let RESULT;
+  // tslint:disable-next-line: typedef
+  return function() {
+    if (liveEvent) {
+      /* eslint-disable */
+      RESULT = liveEvent.apply(this, arguments);
+      liveEvent = null;
+    }
+    return RESULT;
+  };
 }

@@ -1,9 +1,9 @@
 {
     
-    "statisfiedDataBoard": {
-        "release": "/release/zjm/psm/statisfiedDataBoard/",
-        "product": "/zjm/psm/statisfiedDataBoard/",
-        "commad": "ng build statisfiedDataBoard --prod --build-optimizer",
-        "outputPath": "OPMH5_market/statisfiedDataBoard"
+    "searchWords": {
+        "release": "/release/zjm/midbus/searchWords/",
+        "product": "/zjm/midbus/searchWords/",
+        "commad": "ng build searchWords --prod --build-optimizer",
+        "outputPath": "OPMH5/searchWords"
     }
 }

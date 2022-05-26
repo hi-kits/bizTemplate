@@ -15,23 +15,26 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 // 公共模块
 import { COMMONMODILES } from '../../commonModule/commonModule.module';
-// 函数节流
-import { Throttle } from '@mid/data/throttle';
-// 页面事件
+
+
 import { ViewAction } from '../app.action';
 
 /* -------------------------- 页面组件 --------------------------*/
-/* 首页 */
-import { APPIndexComponent } from './index/app.index.component';
-/* 查找 */
+// tslint:disable-next-line: align
+/* 首页 */ import { APPIndexComponent } from './index/app.index.component';
+// tslint:disable-next-line: align
+/* 查询 */
 import { APPLookupComponent } from './_lookup/app.lookup.component';
-
+/* 编辑 */
+import { APPEditComponent } from './edit/app.edit.component';
+/* 添加生效区域 */
+import { APPAddRegion } from './addRegion/app.addRegion.component';
 const Component = [
   APPIndexComponent,
-  APPLookupComponent
+  APPLookupComponent,
+  APPEditComponent,
+  APPAddRegion
 ];
-
-
 
 /*定义路由const表示不可改变*/
 const viewRoutes: Routes = [
@@ -39,25 +42,34 @@ const viewRoutes: Routes = [
   // 留空可以让路径默认指向第一个组件，访问时候没有带任何子路径情况下
   // component是映射的组件
   // children是嵌套组件的包含层
-  { path: 'index', component: APPIndexComponent},
-  { path: '**', redirectTo: 'index', pathMatch: 'full' /* 必须要设置 */}
+  {
+    path: 'index',
+    component: APPIndexComponent,
+    
+    children: [
+      { path: 'addEdit/:id', component: APPEditComponent },
+      // { path: 'addRegion/:id', component: APPAddRegion },
+      // { path: 'extraAward', component: APPExtraAwardComponent },
+    ]
+  },
+  { path: '**', redirectTo: 'index', pathMatch: 'full' /* 必须要设置 */ }
 ];
 @NgModule({
   // 本模块声明的组件模板需要的类所在的其它模块。
-  imports: [ RouterModule.forChild(viewRoutes) ],
+  imports: [RouterModule.forChild(viewRoutes)],
   // declarations 的子集，可用于其它模块的组件模板
-  exports: [ RouterModule ],
+  exports: [RouterModule]
 })
-export class AppViewRoutingModule {}
+export class AppViewRoutingModule { }
 
 @NgModule({
   // 本模块声明的组件模板需要的类所在的其它模块。
   imports: [
     FormsModule,
     ReactiveFormsModule,
-    AppViewRoutingModule,
     // 公共模块
     COMMONMODILES,
+    AppViewRoutingModule
   ],
   // 自定义html元素
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -70,7 +82,6 @@ export class AppViewRoutingModule {}
   providers: [
     // 事件
     ViewAction,
-    Throttle
   ]
 })
-export class ViewModule {}
+export class ViewModule { }

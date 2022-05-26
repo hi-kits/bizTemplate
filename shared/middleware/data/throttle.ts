@@ -14,24 +14,25 @@ export class Throttle {
     _Time = 600;
     // 初始化
     init(callback: () => void, time?: number): void {
-        if (this._THROTTlE !== null) {
-            clearTimeout(this._THROTTlE);
-        }
-        this._THROTTlE = setTimeout(() => {
-            callback();
-        }, (time || this._Time));
+      if (this._THROTTlE !== null) {
+        clearTimeout(this._THROTTlE);
+      }
+      this._THROTTlE = setTimeout(() => {
+        callback();
+      }, (time || this._Time));
     }
 
 }
 export const throttle = (callback: () => void, time?: number) => {
-    const _Time = 600;
-    let _THROTTlE;
-    if (_THROTTlE !== null) {
-        clearTimeout(_THROTTlE);
-    }
-    _THROTTlE = setTimeout(() => {
-        callback();
-    }, (time || _Time));
+  const _Time = 600;
+  /* eslint-disable */
+  let _THROTTlE;
+  if (_THROTTlE !== null) {
+    clearTimeout(_THROTTlE);
+  }
+  _THROTTlE = setTimeout(() => {
+    callback();
+  }, (time || _Time));
 };
 
 
@@ -46,20 +47,22 @@ export const debounce = (fn, delay, immediate = false) => {
   let timer = null;
   let status = true;
   if (!immediate) {
-      // tslint:disable-next-line: typedef
-      return function() {
-          const args = arguments;
-          if (timer) {
-              clearTimeout(timer);
-          }
-          timer = setTimeout(() => fn.apply(this, args), delay);
-      };
+    // tslint:disable-next-line: typedef
+    return function() {
+      /* eslint-disable */
+      const args = arguments;
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    };
   // tslint:disable-next-line: typedef
   }
   return function() {
     clearTimeout(timer);
     if (status) {
       status = false;
+      /* eslint-disable */
       fn.call(this, arguments);
     }
     timer = setTimeout(() => status = true, delay);

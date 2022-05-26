@@ -7,15 +7,17 @@
  */
 
 export function objectClone(Obj: object): object {
-    // 判断不是对象
-    if (Object.prototype.toString.call(Obj) !== '[object Object]' || Obj == null) {
-        return Obj;
-    }
-    // 声明新对象
-    const OBJECT = new Object();
-    // tslint:disable-next-line:forin
-    for (const name in Obj) {
-        OBJECT[name] = this.cloneObject(Obj[name]);
-    }
-    return OBJECT;
+  // 判断不是对象
+  /* eslint-disable */
+  if (Object.prototype.toString.call(Obj) !== '[object Object]' || Obj == null) {
+    return Obj;
+  }
+  // 声明新对象
+  const OBJECT = new Object();
+  // tslint:disable-next-line:forin
+  /* eslint-disable */
+  for (const name in Obj) {
+    OBJECT[name] = this.cloneObject(Obj[name]);
+  }
+  return OBJECT;
 }

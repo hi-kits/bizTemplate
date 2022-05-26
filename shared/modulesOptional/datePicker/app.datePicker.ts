@@ -14,14 +14,14 @@ import differenceInCalendarDays from 'date-fns/differenceInCalendarDays';
 // 日期格式化
 import { DateServices } from '@shared/services/date.services';
 
-// tslint:disable-next-line: new-parens
+/* eslint-disable */
 const appModuleOptionalParameter = new AppModuleOptionalParameter;
 
 @Component({
   selector: 'app-date-picker',
   templateUrl: './app.datePicker.html',
   styleUrls: ['./app.datePicker.css'],
-  styles: [`nz-date-picker, nz-month-picker, nz-range-picker, nz-week-picker {margin: 0 8px 12px 0;}`],
+  styles: ['nz-date-picker, nz-month-picker, nz-range-picker, nz-week-picker {margin: 0 8px 12px 0;}'],
 })
 
 export class AppDatePickerComponent {
@@ -102,6 +102,7 @@ export class AppDatePickerComponent {
   // 结束时间
   endTime;
   // 不可选择的日期
+  /* eslint-disable */
   @Input() nzDisabledDate = (current: Date, partial: 'start' | 'end'): boolean => {
     if (this.nzDisabledDate) {
       if (this.nzDisabledStatus) {
@@ -146,21 +147,22 @@ export class AppDatePickerComponent {
       this.handleDate(choice, this.dateType);
     }
   }
-  change(choice): boolean {
+  change(choice): void {
     if (choice === null || choice.length === 0) {
       this.ngModelChange.emit('');
-      return false;
+      return;
     }
     if (this.dateType === 'date') {
       this.handleDate(choice, this.dateType);
     }
   }
-
-  handleDate(choice, dateType): void | boolean {
+  handleDate(choice, dateType): void {
     if (!choice) {
-      return false;
+      return;
     }
+    /* eslint-disable */
     let VALUE;
+    /* eslint-disable */
     let EMIT_VALUE;
     if (choice !== undefined) {
       switch (dateType) {
@@ -170,9 +172,11 @@ export class AppDatePickerComponent {
           break;
         case 'range':
           if (choice.length === 0) {
-            return false;
+            return;
           }
+          /* eslint-disable */
           let START = new Date(choice[0].getFullYear(), choice[0].getMonth(), choice[0].getDate(), 0, 0, 0);
+          /* eslint-disable */
           let END = new Date(choice[1].getFullYear(), choice[1].getMonth(), choice[1].getDate(), 23, 59, 59);
           if (this.isSetTime) {
             START = new Date(choice[0]);

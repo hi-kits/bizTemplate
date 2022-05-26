@@ -6,5 +6,5 @@
  * @Copyright © 2019 海尔优家智能科技（北京）有限公司. All rights reserved.
  */
 export function isDefined(value): boolean {
-    return typeof value !== 'undefined';
+  return typeof value !== 'undefined';
 }

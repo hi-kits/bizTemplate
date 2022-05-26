@@ -1,3 +1,9 @@
+/*
+ * @Author: 20021637
+ * @Date: 2021-12-02 14:28:54
+ * @LastEditTime: 2021-12-27 16:07:57
+ * @Description: file content
+ */
 /**
  * 路由基本模型
  * @class: AppRoutingModule
@@ -18,8 +24,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppParameter } from './app.parameter';
 import { BasicServices } from '@shared/services';
 import { ValidatorAction } from '@shared/services/app.validator.services';
-import { DictionaryServices } from '@shared/services/dictionary.services';
-
+import { tokenGuard } from '@shared/guard/routeguard.token';
+/* 查询 */
+/* eslint-disable */
 const _AppParam = new AppParameter;
 
 /*定义路由const表示不可改变*/
@@ -35,27 +42,33 @@ const routes: Routes = [
    children:Routes 子路由相关
    */
   // 首页
-  { path: 'view', data: { title: _AppParam.info.TITLE },
+  {
+    path: 'view', 
+    data: { title: _AppParam.info.title },
+    canActivate: [tokenGuard],
     loadChildren: () => import('./view/app.view.module').then(m => m.ViewModule)
   },
-  // 审核
-  { path: 'audit', data: { title: _AppParam.info.TITLE },
-    loadChildren: () => import('./audit/app.view.module').then(m => m.ViewModule)
+  // 
+  {
+    path: 'noPermission', 
+    data: { title: _AppParam.info.title },
+    loadChildren: () => import('./view/app.noPermission.module').then(m => m.ViewModule)
   },
   // 错误路由重定向[写在最后一个]
-  { path: '**', redirectTo: '/view/index', pathMatch: 'full' /* 必须要设置 */}
+  { 
+    path: '**', 
+    redirectTo: '/view/index', 
+    pathMatch: 'full' /* 必须要设置 */ }
 ];
 
 @NgModule({
   // 声明本模块中拥有的视图类。Angular 有三种视图类：组件、指令和管道。
   declarations: [
     // 页面
-    // APPToolBarComponent,
   ],
   // 服务的创建者，并加入到全局服务列表中，可用于应用任何部分。
   providers: [
-    ValidatorAction,
-    DictionaryServices,
+    tokenGuard
   ],
   imports: [
     BrowserModule,
@@ -78,8 +91,8 @@ export class AppRoutingModule {
     private basic: BasicServices,
     private validatorAction: ValidatorAction,
   ) {
-    this.basic.init(_AppParam.info.PAGE_ID);
-    this.validatorAction.isValidator = _AppParam.info.IS_VALIDATOR;
+    this.basic.init(_AppParam.info.pageId);
+    this.validatorAction.isValidator = _AppParam.info.isValidator;
   }
 }
 

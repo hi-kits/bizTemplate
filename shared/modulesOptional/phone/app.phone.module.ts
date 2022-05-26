@@ -12,38 +12,35 @@ import { CommonModule } from '@angular/common';
 // 页面组件
 import { AppPhoneComponent } from './app.phone.component';
 
-
-
 const Component = [
-    AppPhoneComponent,
+  AppPhoneComponent,
 ];
 
-
 @NgModule({
-    // 本模块声明的组件模板需要的类所在的其它模块。
-    imports: [
-        CommonModule,
-    ],
-    // 声明本模块中拥有的视图类。Angular 有三种视图类：组件、指令和管道。
-    // 这里引入共享的组件
-    declarations: [
-        ...Component,
+  // 本模块声明的组件模板需要的类所在的其它模块。
+  imports: [
+    CommonModule,
+  ],
+  // 声明本模块中拥有的视图类。Angular 有三种视图类：组件、指令和管道。
+  // 这里引入共享的组件
+  declarations: [
+    ...Component,
 
-    ],
-    entryComponents: [...Component],
-    // 这里将共享的组件放入到导出的出口中
-    exports: [
-        CommonModule,
-        // NzButtonModule,
-        ...Component
-    ],
-        // 自定义html元素
-    schemas: [],
+  ],
+  entryComponents: [...Component],
+  // 这里将共享的组件放入到导出的出口中
+  exports: [
+    CommonModule,
+    // NzButtonModule,
+    ...Component
+  ],
+  // 自定义html元素
+  schemas: [],
 
-    // 服务的创建者，并加入到全局服务列表中，可用于应用任何部分。
-    providers: [
-    ],
+  // 服务的创建者，并加入到全局服务列表中，可用于应用任何部分。
+  providers: [
+  ],
 
 })
-export class APPPhoneModule {}
+export class APPPhoneModule { }
 

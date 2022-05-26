@@ -10,34 +10,34 @@ import { Injectable, TemplateRef } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class Message {
 
-    constructor(
-        private message: NzMessageService,
-    ) {}
+  constructor(
+    private message: NzMessageService,
+  ) { }
 
-    success(text: string | TemplateRef<void>): void  {
-        this.message.success(text);
-    }
-    warning(text: string | TemplateRef<void>): void  {
-        this.message.warning(text);
-    }
-    error(text: string | TemplateRef<void>): void  {
-        this.message.error(text);
-    }
-    info(text: string | TemplateRef<void>): void  {
-        this.message.info(text);
-    }
-    // duration: 持续时间(毫秒)，当设置为0时不消失
-    loading(text: string | TemplateRef<void>, duration?): void  {
-        if (duration) {
-            this.message.loading(text, { nzDuration: duration});
-        } else {
-            this.message.loading(text);
+  success(text: string | TemplateRef<void>): void {
+    this.message.success(text);
+  }
+  warning(text: string | TemplateRef<void>): void {
+    this.message.warning(text);
+  }
+  error(text: string | TemplateRef<void>): void {
+    this.message.error(text);
+  }
+  info(text: string | TemplateRef<void>): void {
+    this.message.info(text);
+  }
+  // duration: 持续时间(毫秒)，当设置为0时不消失
+  loading(text: string | TemplateRef<void>, duration?): void {
+    if (duration) {
+      this.message.loading(text, { nzDuration: duration });
+    } else {
+      this.message.loading(text);
 
-        }
     }
+  }
 
 }

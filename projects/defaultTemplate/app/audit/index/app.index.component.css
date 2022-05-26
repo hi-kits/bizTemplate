@@ -1,6 +1,0 @@
-.ImgWrap { overflow: hidden; overflow-y: auto;height: 720px;}
-.ImgWrap img{width: 100%;}
-.ImgWrap img.TabImg {position: absolute; bottom: 12px;}
-
-/*定义滑块 内阴影+圆角*/
-.ImgWrap::-webkit-scrollbar{background-color: #fff;width: 0px;}

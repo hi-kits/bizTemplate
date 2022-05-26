@@ -60,6 +60,6 @@ export class AppModule {
     private appParam: AppParam,
   ) {
     // 测试环境
-    this.appParam.isTestParam =  environment.IS_TEST;
+    this.appParam.isTestParam = environment.IS_TEST;
   }
 }

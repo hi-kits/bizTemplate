@@ -60,7 +60,6 @@ export class APPCropperComponent implements OnInit {
 
   // 组件初始化
   ngOnInit(): void {
-    alert(111);
     this.croppedImage = this.videoPosterUrl;
     if (this.croppedImage) {
       this.getImgToBase64(this.croppedImage, (Base64) => {
@@ -84,21 +83,21 @@ export class APPCropperComponent implements OnInit {
     this.imageChangedEvent = event;
   }
   imageCropped(event: ImageCroppedEvent): void {
-      this.croppedImage = event.base64;
-      // this.uploadImg(this.croppedImage);
+    this.croppedImage = event.base64;
+    // this.uploadImg(this.croppedImage);
 
   }
   imageLoaded(): void {
     console.log('img load');
-      // show cropper
+    // show cropper
   }
   cropperReady(): void {
     console.log('cropper ready');
-      // cropper ready
+    // cropper ready
   }
   loadImageFailed(): void {
     console.log('show message');
-      // show message
+    // show message
   }
   // 将图片转换为Base64
   getImgToBase64(url, callback): void {
@@ -107,7 +106,7 @@ export class APPCropperComponent implements OnInit {
     // tslint:disable-next-line:new-parens
     const img = new Image();
     img.crossOrigin = 'anonymous';
-    img.onload =  () => {
+    img.onload = () => {
       canvas.height = img.height;
       canvas.width = img.width;
       ctx.drawImage(img, 0, 0);
@@ -120,7 +119,7 @@ export class APPCropperComponent implements OnInit {
   // 上传图片
   uploadImg(imgBase64): void {
     if (this.RatioValue !== 3) {
-      this.set('uploadImgByBase64', {imgBase64}, (ResultData) => {
+      this.set('uploadImgByBase64', { imgBase64 }, (ResultData) => {
         this.setResult(ResultData);
       });
     } else {
@@ -160,7 +159,7 @@ export class APPCropperComponent implements OnInit {
     } else {
       this.idDisabled = false;
     }
-    this.aspectRatio = type === 1 ?  (4 / 3) : type === 2 ? (3 / 4) : type === 4 ? (5 / 2) : (1 / 1);
+    this.aspectRatio = type === 1 ? (4 / 3) : type === 2 ? (3 / 4) : type === 4 ? (5 / 2) : (1 / 1);
     switch (type) {
       case 1:
       case 4:
@@ -189,7 +188,7 @@ export class APPCropperComponent implements OnInit {
         (
           this.imageChangedEvent.target && this.imageChangedEvent.target.files[0] &&
           !this.imageChangedEvent.target.files[0].name.endsWith('.gif')) ||
-          (!this.imageChangedEvent.target && this.videoPosterUrl && !this.videoPosterUrl.endsWith('.gif')
+        (!this.imageChangedEvent.target && this.videoPosterUrl && !this.videoPosterUrl.endsWith('.gif')
         )
       )
     ) {
@@ -197,56 +196,54 @@ export class APPCropperComponent implements OnInit {
       return false;
     }
     this.submitForm();
+    return true;
   }
-
-
-
   // 请求
   private httpSend(options: HttpOption): Promise<any> {
     return this.httpServices.HTTP(options, (ResultData) => {
-        if (ResultData.name.indexOf('Delete') > -1) {
-            this.message.success('删除成功！');
-        }
+      if (ResultData.name.indexOf('Delete') > -1) {
+        this.message.success('删除成功！');
+      }
     }, (error) => {
-        if (error.name !== 'msgTest') {
-            this.message.warning(error.result.message !== '' ? error.result.message : '数据错误！');
-        }
+      if (error.name !== 'msgTest') {
+        this.message.warning(error.result.message !== '' ? error.result.message : '数据错误！');
+      }
     });
   }
   // 提交数据
   set(name, options: any, callback?: (r) => void, error?: () => void): Promise<any> {
-    const HTTP_BODY = {...options}; // 请求数据
+    const HTTP_BODY = { ...options }; // 请求数据
     let URL = ''; // 请求url
     let PARAM_URL = ''; // 参数url
     const METHOD = 'POST'; // 请求方式
     let IS_IGNORE = false; // 是否忽略返回结果
     switch (name) {
-        // 图片上传
-        case 'upload':
-          IS_IGNORE = true;
-          PARAM_URL = 'plugins/fileUpload/pictureUpload';
-          break;
-        // 图片上传 Base64
-        case 'uploadImgByBase64':
-          // IS_IGNORE = true;
-          PARAM_URL = 'scspgc/commons/v2/uploadImgByBase64';
-          break;
-        default:
-            return null;
+      // 图片上传
+      case 'upload':
+        IS_IGNORE = true;
+        PARAM_URL = 'plugins/fileUpload/pictureUpload';
+        break;
+      // 图片上传 Base64
+      case 'uploadImgByBase64':
+        // IS_IGNORE = true;
+        PARAM_URL = 'scspgc/commons/v2/uploadImgByBase64';
+        break;
+      default:
+        return null;
     }
     // URL = 'http://10.180.109.178:11790' + PARAM_URL;
     URL = environment.paths.SERVER_URL + PARAM_URL;
     return this.httpSend({
-        name,
-        method: METHOD,
-        url: URL,
-        paramUrl: PARAM_URL,
-        httpBody: HTTP_BODY,
-        // tslint:disable-next-line: only-arrow-functions
-        callback: callback || function(): void { },
-        // tslint:disable-next-line: only-arrow-functions
-        error: error || function(): void  { },
-        isIgnore: IS_IGNORE
+      name,
+      method: METHOD,
+      url: URL,
+      paramUrl: PARAM_URL,
+      httpBody: HTTP_BODY,
+      // tslint:disable-next-line: only-arrow-functions
+      callback: callback || function (): void { },
+      // tslint:disable-next-line: only-arrow-functions
+      error: error || function (): void { },
+      isIgnore: IS_IGNORE
     });
   }
 }

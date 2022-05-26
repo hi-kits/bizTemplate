@@ -9,7 +9,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AppModuleOptionalParameter } from '@shared/modulesOptional/app.modulesOptional.parameter';
 
-// tslint:disable-next-line: new-parens
+/* eslint-disable */
 const appModuleOptionalParameter = new AppModuleOptionalParameter;
 
 @Component({

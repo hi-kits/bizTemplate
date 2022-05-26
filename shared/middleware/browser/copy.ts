@@ -9,35 +9,35 @@
  */
 
 export function Copy(text, callback?): void {
-    const ID = 'TEXTAREA_COPY';
-    if (!document.getElementById(ID)) {
-        // 创建文本域
-        const TEXTAREA = document.createElement('textarea');
-        // 设置id
-        TEXTAREA.id = ID;
-        // 赋值
-        TEXTAREA.value = text;
-        // 设置样式
-        TEXTAREA.style.width = '4px';
-        TEXTAREA.style.height = '4px';
-        TEXTAREA.style.border = '0';
-        TEXTAREA.style.opacity = '0';
-        TEXTAREA.style.position = 'fixed';
-        TEXTAREA.style.top = '0';
-        TEXTAREA.style.left = '0';
-        // 添加到body
-        document.getElementsByTagName('body')[0].appendChild(TEXTAREA);
-    } else {
-        // tslint:disable-next-line: no-string-literal
-        document.getElementById(ID)['value'] = text;
-    }
-
+  const ID = 'TEXTAREA_COPY';
+  if (!document.getElementById(ID)) {
+    // 创建文本域
+    const TEXTAREA = document.createElement('textarea');
+    // 设置id
+    TEXTAREA.id = ID;
+    // 赋值
+    TEXTAREA.value = text;
+    // 设置样式
+    TEXTAREA.style.width = '4px';
+    TEXTAREA.style.height = '4px';
+    TEXTAREA.style.border = '0';
+    TEXTAREA.style.opacity = '0';
+    TEXTAREA.style.position = 'fixed';
+    TEXTAREA.style.top = '0';
+    TEXTAREA.style.left = '0';
+    // 添加到body
+    document.getElementsByTagName('body')[0].appendChild(TEXTAREA);
+  } else {
     // tslint:disable-next-line: no-string-literal
-    document.getElementById(ID)['select'](); // 选择对象
-    document.execCommand('Copy'); // 执行浏览器复制命令
-    console.log('复制成功！');
-    if (callback) {
-        callback();
-    }
+    document.getElementById(ID)['value'] = text;
+  }
+
+  // tslint:disable-next-line: no-string-literal
+  document.getElementById(ID)['select'](); // 选择对象
+  document.execCommand('Copy'); // 执行浏览器复制命令
+  console.log('复制成功！');
+  if (callback) {
+    callback();
+  }
 
 }

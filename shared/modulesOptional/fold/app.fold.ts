@@ -9,13 +9,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AppModuleOptionalParameter } from '@shared/modulesOptional/app.modulesOptional.parameter';
 
-// tslint:disable-next-line: new-parens
+/* eslint-disable */
 const appModuleOptionalParameter = new AppModuleOptionalParameter;
 
 @Component({
   selector: 'app-fold',
-  template: `<a href="javascript:;" style="padding:0 1em">{{text}} <i nz-icon nzType="{{icon}}"></i></a>`,
-  // tslint:disable-next-line: no-host-metadata-property
+  template: '<a href="javascript:;" style="padding:0 1em">{{text}} <i nz-icon nzType="{{icon}}"></i></a>',
+ /* eslint-disable */
   host: {
     '(click)': 'queryState(foldState)'
   },

@@ -10,6 +10,6 @@ const isArray =
     Array.isArray ||
     // tslint:disable-next-line: only-arrow-functions
     function(arg): boolean {
-        return Object.prototype.toString.call(arg) === '[object Array]';
+      return Object.prototype.toString.call(arg) === '[object Array]';
     };
 export default isArray;

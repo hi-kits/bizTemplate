@@ -21,14 +21,14 @@ export class Screen{
      * @param value 需要转换的数值
      */
     toPreview(value: number): number {
-        return this.PreviewSize / this.OriginalSize * value;
+      return this.PreviewSize / this.OriginalSize * value;
     }
     /**
      * 将375尺寸数值转换成1080原始的尺寸
      * @param value 需要转换的数值
      */
     toOriginal(value: number): number {
-        return this.OriginalSize / this.PreviewSize  * value;
+      return this.OriginalSize / this.PreviewSize  * value;
     }
 }
 

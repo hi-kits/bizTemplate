@@ -11,21 +11,21 @@ import { FroalaEditorModule, FroalaViewModule } from 'hi-angular-froala-wysiwyg'
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 @NgModule({
-    declarations: [
-        FroalaEditorComponent,
-        APPCropperComponent
-    ],
-    imports: [
-        NzModalModule,
-        CommonModule,
-        ImageCropperModule,
-        NzButtonModule,
-        FroalaEditorModule.forRoot(),
-        FroalaViewModule.forRoot()
-    ],
-    exports: [
-        FroalaEditorComponent,
-        NzButtonModule,
-        ],
-  })
-export class AppFroalaEditorModule {}
+  declarations: [
+    FroalaEditorComponent,
+    APPCropperComponent
+  ],
+  imports: [
+    NzModalModule,
+    CommonModule,
+    ImageCropperModule,
+    NzButtonModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
+  ],
+  exports: [
+    FroalaEditorComponent,
+    NzButtonModule,
+  ],
+})
+export class AppFroalaEditorModule { }

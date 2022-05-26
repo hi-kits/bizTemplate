@@ -11,31 +11,31 @@ import { Injectable } from '@angular/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class Notification {
 
-    constructor(
-        private notification: NzNotificationService,
-    ) {}
+  constructor(
+    private notification: NzNotificationService,
+  ) { }
 
-    create(type: string, title: string, content: string): void {
-        this.notification.create(type, title, content);
-    }
-    success(title: string, content: string, options?): void {
-        this.notification.success(title, content, options);
-    }
-    blank(title: string, content: string, options?): void {
-        this.notification.blank(title, content, options);
-    }
-    error(title: string, content: string, options?): void {
-        this.notification.error(title, content, options);
-    }
-    info(title: string, content: string, options?): void {
-        this.notification.info(title, content, options);
-    }
-    warning(title: string, content: string, options?): void {
-        this.notification.warning(title, content, options);
-    }
+  create(type: string, title: string, content: string): void {
+    this.notification.create(type, title, content);
+  }
+  success(title: string, content: string, options?): void {
+    this.notification.success(title, content, options);
+  }
+  blank(title: string, content: string, options?): void {
+    this.notification.blank(title, content, options);
+  }
+  error(title: string, content: string, options?): void {
+    this.notification.error(title, content, options);
+  }
+  info(title: string, content: string, options?): void {
+    this.notification.info(title, content, options);
+  }
+  warning(title: string, content: string, options?): void {
+    this.notification.warning(title, content, options);
+  }
 
 }

@@ -9,12 +9,11 @@
 
 // 全角转半角
 function ToCDB(str) {
-  let tmp = "";
+  let tmp = '';
   for (let i = 0; i < str.length; i++) {
     if (str.charCodeAt(i) > 65248 && str.charCodeAt(i) < 65375) {
       tmp += String.fromCharCode(str.charCodeAt(i) - 65248);
-    }
-    else {
+    } else {
       tmp += String.fromCharCode(str.charCodeAt(i));
     }
   }
@@ -22,8 +21,9 @@ function ToCDB(str) {
 }
 // 半角转全角
 function ToDBC(txtstring) {
-  let tmp = "";
+  let tmp = '';
   for (let i = 0; i < txtstring.length; i++) {
+    /* eslint-disable */
     if (txtstring.charCodeAt(i) == 32) {
       tmp = tmp + String.fromCharCode(12288);
     }

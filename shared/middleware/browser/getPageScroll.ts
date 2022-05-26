@@ -11,18 +11,20 @@
 export function getPageScroll(): {
     X: any;
     Y: any;
-} {
-    let x: any;
-    let y: any;
-    if (window.pageYOffset) {
-        // 除了IE
-        y = window.pageYOffset; x = window.pageXOffset;
-    } else if (document.documentElement && document.documentElement.scrollTop) {
-        // IE 6严格
-        y = document.documentElement.scrollTop; x = document.documentElement.scrollLeft;
-    } else if (document.body) {
-        // 所有其他的IE
-        y = document.body.scrollTop; x = document.body.scrollLeft;
-    }
-    return { X: x, Y: y };
+    } {
+  /* eslint-disable */
+  let x: any;
+  /* eslint-disable */
+  let y: any;
+  if (window.pageYOffset) {
+    // 除了IE
+    y = window.pageYOffset; x = window.pageXOffset;
+  } else if (document.documentElement && document.documentElement.scrollTop) {
+    // IE 6严格
+    y = document.documentElement.scrollTop; x = document.documentElement.scrollLeft;
+  } else if (document.body) {
+    // 所有其他的IE
+    y = document.body.scrollTop; x = document.body.scrollLeft;
+  }
+  return { X: x, Y: y };
 }

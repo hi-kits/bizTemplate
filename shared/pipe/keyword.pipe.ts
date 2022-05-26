@@ -16,7 +16,7 @@ export class SearchkeywordPipe implements PipeTransform {
 
   constructor(private sanitizer: DomSanitizer) {
   }
-
+  /* eslint-disable */
   transform(val: string, keyword: string): any {
     const Reg = new RegExp(keyword, 'i');
     if (val) {

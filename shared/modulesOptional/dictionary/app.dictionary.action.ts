@@ -17,56 +17,58 @@ import { HttpServices } from '@shared/services';
 
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class DictionaryAction {
-    // 请求参数
-    param: object;
-    constructor(
-        // private message: Message,
-        private httpServices: HttpServices,
-    ) { }
+  // 请求参数
+  param: object;
+  constructor(
+    // private message: Message,
+    private httpServices: HttpServices,
+  ) { }
 
-    // 请求
-    private httpSend(options: HttpOption): Promise<any> {
-        return this.httpServices.HTTP(options, (ResultData) => {
-        }, (error) => {
-            if (error.name !== 'msgTest') {
-                console.log (error.result.message !== '' ? error.result.message : '数据错误！');
-            }
-        });
+  // 请求
+  private httpSend(options: HttpOption): Promise<any> {
+    return this.httpServices.HTTP(options, (ResultData) => {
+    }, (error) => {
+      if (error.name !== 'msgTest') {
+        console.log(error.result.message !== '' ? error.result.message : '数据错误！');
+      }
+    });
+  }
+  /** 获取数据 */
+  getDic(options?: any, callback?: (r) => void, error?: () => void): Promise<any> {
+    /* eslint-disable */
+    let httpBody;
+    /* eslint-disable */
+    let paramURL; // 参数url
+    const IS_IGNORE = false; // 是否忽略返回结果
+    if (typeof options.url === 'string') {
+      // 自定义自动接口
+      httpBody = { code: options.type };
+      paramURL = options.url;
+    } else if (typeof options.url === 'boolean') {
+      // post 字典接口
+      httpBody = { code: options.type };
+      paramURL = 'appbm/common/dictionary';
+    } else if (options.url === 0) {
+      paramURL = environment.paths.SERVER_URL_SCORD + 'common/' + options.type + '/dictionary';
+    } else {
+      httpBody = { dictCode: options.type };
+      paramURL = 'plugins/dict/data/loadDict';
     }
-    /** 获取数据 */
-    getDic(options?: any, callback?: (r) => void, error?: () => void): Promise<any> {
-        let httpBody;
-        let paramURL; // 参数url
-        const IS_IGNORE = false; // 是否忽略返回结果
-        if (typeof options.url === 'string') {
-            // 自定义自动接口
-            httpBody = { code: options.type };
-            paramURL = options.url;
-        } else if (typeof options.url === 'boolean') {
-            // post 字典接口
-            httpBody = { code: options.type };
-            paramURL = 'appbm/common/dictionary';
-        } else if (options.url === 0) {
-            paramURL = environment.paths.SERVER_URL_SCORD + 'common/' + options.type + '/dictionary';
-        } else {
-            httpBody = { dictCode: options.type };
-            paramURL = 'plugins/dict/data/loadDict';
-        }
 
-        const URL = environment.paths.SERVER_URL + paramURL;
-        return this.httpSend({
-            name: options.type,
-            method: 'GET',
-            url: URL,
-            paramUrl: paramURL,
-            httpBody,
-            callback: callback || (() => { }),
-            error: error || (() => { }),
-            isIgnore: IS_IGNORE
-        });
-    }
+    const URL = environment.paths.SERVER_URL + paramURL;
+    return this.httpSend({
+      name: options.type,
+      method: 'GET',
+      url: URL,
+      paramUrl: paramURL,
+      httpBody,
+      callback: callback || (() => { }),
+      error: error || (() => { }),
+      isIgnore: IS_IGNORE
+    });
+  }
 
 }

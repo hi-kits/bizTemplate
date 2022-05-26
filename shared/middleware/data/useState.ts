@@ -8,7 +8,7 @@
  */
 
 export function useState<S>(initialState: S): [S, (prevState: S) => S] {
-    return [initialState, (prevState) => {
-        return initialState = prevState;
-    }];
+  return [initialState, (prevState) => {
+    return initialState = prevState;
+  }];
 }

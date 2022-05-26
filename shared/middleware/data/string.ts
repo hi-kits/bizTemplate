@@ -7,16 +7,16 @@
  * @description
  */
 export function stringify(obj: object): string {
-    return obj ? Object.keys(obj).sort().map((key) => {
-        let val = obj[key];
-        if (val === undefined || val === null) {
-            val =  '';
-        }
-        if (Array.isArray(val)) {
-            val = val.join(',');
-        }
-        return key + '=' + val;
-    }).filter((x) => {
-        return x.length > 0;
-    }).join('&') : '';
+  return obj ? Object.keys(obj).sort().map((key) => {
+    let val = obj[key];
+    if (val === undefined || val === null) {
+      val =  '';
+    }
+    if (Array.isArray(val)) {
+      val = val.join(',');
+    }
+    return key + '=' + val;
+  }).filter((x) => {
+    return x.length > 0;
+  }).join('&') : '';
 }

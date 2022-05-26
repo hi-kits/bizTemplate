@@ -7,5 +7,5 @@
  * @description
  */
 export function isFunction(value): boolean {
-    return typeof value === 'function';
+  return typeof value === 'function';
 }

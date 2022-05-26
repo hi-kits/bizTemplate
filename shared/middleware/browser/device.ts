@@ -12,12 +12,13 @@ export class Device {
   readonly device: {
     [x: string]: any,
   };
+  /* eslint-disable */
   init(callback): void {
     // 定义设备对象
     const UA = navigator.userAgent;
     const html = document.querySelector('html');
     const metaViewport = document.querySelector('meta[name="viewport"]');
-
+    /* eslint-disable */
     const android = UA.match(/(Android);?[\s\/]+([\d.]+)?/);
     const ipad = UA.match(/(iPad).*OS\s([\d_]+)/);
     const ipod = UA.match(/(iPod)(.*OS\s([\d_]+))?/);
@@ -61,6 +62,7 @@ export class Device {
     // Minimal UI
     if (this.device.os && this.device.os === 'ios') {
       const osVersionArr = this.device.osVersion.split('.');
+      /* eslint-disable */
       this.device.minimalUi = !this.device.webView && (ipod || iphone) && (osVersionArr[0] * 1 === 7 ? osVersionArr[1] * 1 >= 1 : osVersionArr[0] * 1 > 7) &&
         metaViewport && metaViewport.getAttribute('content').indexOf('minimal-ui') >= 0;
     }
@@ -88,6 +90,7 @@ export class Device {
     }
     // IOS 样式
     if (this.device.os) {
+      /* eslint-disable */
       classNames.push(this.device.os, this.device.os + '-' + this.device.osVersion.split('.')[0], this.device.os + '-' + this.device.osVersion.replace(/\./g, '-'));
       if (this.device.os === 'ios') {
         const major = parseInt(this.device.osVersion.split('.')[0], 10);

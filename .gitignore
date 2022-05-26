@@ -4,6 +4,7 @@
 /dist
 /OPMH5
 /out-tsc
+/projects/defaultTemplate/
 
 .history/
 # dependencies
@@ -37,6 +38,7 @@ testem.log
 
 # System Files
 .DS_Store
+*/.DS_Store
 Thumbs.db
 .prettierrc.json
 tslint.json
