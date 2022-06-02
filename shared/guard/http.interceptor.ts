@@ -115,7 +115,7 @@ export class NoopInterceptor implements HttpInterceptor {
     let URL = req.url;
     // startsWith 判断当前字符串是否以 https:// 或 http:// 作为开头
     if (!URL.startsWith('https://') && !URL.startsWith('http://') && !/i18n/.test(URL)) {
-      URL = environment.origin ? environment.paths.SERVER_URL + URL : environment.paths.SERVER_URL + URL;
+      URL = environment.paths.SERVER_URL;
     }
     // 设置 Headers
     // tslint:disable-next-line: no-console

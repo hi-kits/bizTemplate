@@ -11,22 +11,7 @@
  *      该环境映射的列表，可以在 `.angular-cli.json` 中找到
  */
 // 验收地址
-const YANSHOU = '//zj-yanshou.haier.net';
-// 生产地址
-const SHENGCHAN = '//zj.haier.net';
-// 是否是预发域名
-const RELEASE = window.location.href.indexOf('haier.net/release') > -1;
-// 三翼鸟域名
-/* eslint-disable */
-const ORIGIN_SYN = window.location.protocol + (window.location.origin.indexOf('ys-zjrs') > -1 ? YANSHOU : !RELEASE ? '//syn.haier.net' : '//zj-pre-release.haier.net');
-var MPS_URL = window.location.protocol + '//mps.haiersmarthomes.com';
-// 运营平台域名
-/* eslint-disable */
-const ORIGIN = window.location.protocol + (window.location.origin.indexOf('ys-zjrs') > -1 ? YANSHOU : !RELEASE ? SHENGCHAN : '//zj-pre-release.haier.net');
-window['PATHS'] = window['PATHS'] || {};
-// 智家内容发布平台
-/* eslint-disable */
-var CON_ORIGIN = window.location.protocol + (window.location.origin.indexOf('ys-zjrs') > -1 ? '//syntest.haier.net' : !RELEASE ? '//syn.haier.net' : '//zj-pre-release.haier.net');
+const protocol = 'https:';
 export const environment = {
   publicBase: '/',
   production: true,
@@ -52,36 +37,27 @@ export const environment = {
   hmr: false,
   /** 生产环境  接口路径 */
   paths: {
-    // 接口域名
-    SERVER_URL: window['PATHS'].SERVER_URL || ORIGIN + '/zjm/',
-    // 老接口域名
-    SERVER_URL_OLD: window['PATHS'].SERVER_URL_OLD || ORIGIN + '/',
+    /*----------- 通用接口配置 ----------*/
+    // 运营平台接口域名
     // 无网关接口域名
-    SERVER_URL_NO_GATEWAY: window['PATHS'].SERVER_URL_NO_GATEWAY || ORIGIN + '/',
-    // 三翼鸟接口域名
-    SERVER_URL_SYN: window['PATHS'].SERVER_URL_SYN || ORIGIN + '/zjm/syn/',
-    // 三翼鸟接口域名-内容平台
-    SERVER_URL_SYN1: window['PATHS'].SERVER_URL_SYN || ORIGIN + '/zjm/',
-    // 东南亚接口域名
-    SERVER_URL_SCORD: window['PATHS'].SERVER_URL_SCORD || 'https://uhome-sea.haieriot.net/',
-    // 星月系统接口域名
-    SERVER_URL_NEBULA: window['PATHS'].SERVER_URL_NEBULA || ORIGIN_SYN + '/nebula/',
-    // 星云系统-内容发布接口域名
-    SERVER_URL_NEBULA_GW: window.location.origin.indexOf('ys-zjrs') > -1 ? window['PATHS'].SERVER_URL_NEBULA_GW : ORIGIN_SYN + '/nebula-gw/',
-    // 中台-搜索
-    SERVER_URL_MPS_GW: window.location.origin.indexOf('ys-zjrs') > -1 ? window['PATHS'].SERVER_URL_MPS_GW : MPS_URL + '/mps-gw/',
     // 一站式发布平台接口
-    SERVER_URL_ONESTOP: window['PATHS'].SERVER_URL_ONESTOP || ORIGIN + '/synms/upm/',
-    // 崩溃日志接口地址
-    SERVER_URL_PERFA: window['PATHS'].SERVER_URL_PERFA || ORIGIN + '/synms/synlog/crash/',
-    // 一站式发布平台接口-多维监控.崩溃日志
-    SERVER_URL_MONITOR: window['PATHS'].SERVER_URL_MONITOR || ORIGIN + '/synms/',
+    // 三翼鸟接口域名
+    // 内容发布平台-智家
+    SERVER_URL: protocol + '//zj.haier.net/',
+    /*----------- 东南亚 ----------*/
+    // 东南亚接口域名
+    SERVER_URL_SCORD: 'https://uhome-sea.haieriot.net/',
+
+    /*----------- 星云系统 ----------*/
+    // 星云系统接口域名
+    SERVER_URL_NEBULA: protocol + '//syn.haier.net/',
+
     /*----------- 内容发布 ----------*/
     // 内容发布平台接口-三翼鸟
-    CON_SYN_SERVER_URL: CON_ORIGIN,
-    // 内容发布平台-智家
-    CON_SERVER_URL: ORIGIN,
+    CON_SYN_SERVER_URL: protocol + '//syn.haier.net/',
+
+    /*----------- 中台 ----------*/
+    // 中台-搜索
+    SERVER_URL_MPS: protocol + '//mps.haiersmarthomes.com',
   },
 };
-
-

@@ -12,15 +12,7 @@
  */
 
 // 本地测试窗口协议更改
-// const PROTOCOL =  'http:';
-const PROTOCOL =  'https:';
-// 验收地址
-const YANSHOU = '//zj-yanshou.haier.net';
-
-// 运营平台域名
-const ORIGIN = PROTOCOL + YANSHOU ;
-
-
+const protocol = 'https:';
 
 export const environment = {
   // 本地测试环境  文件路径
@@ -49,30 +41,28 @@ export const environment = {
   hmr: false,
   /** 本地测试环境  接口路径 */
   paths: {
-    // 老接口域名
-    SERVER_URL_OLD: 'https://zj.haier.net/',
-    // SERVER_URL_OLD: ORIGIN + '/',
+    /*----------- 通用接口配置 ----------*/
+    // 运营平台接口域名
     // 无网关接口域名
-    SERVER_URL_NO_GATEWAY: ORIGIN + '/',
-    // 接口域名
-    SERVER_URL: ORIGIN + '/zjm/',
-    // 三翼鸟接口域名
-    SERVER_URL_SYN: ORIGIN + '/zjm/syn/',
-    // 三翼鸟接口域名-内容平台
-    SERVER_URL_SYN1: ORIGIN + '/zjm/',
-    // 东南亚接口域名
-    SERVER_URL_SCORD:  PROTOCOL + 'uhome-sea.haieriot.net/',
-    // 星云系统接口域名
-    SERVER_URL_NEBULA: ORIGIN + '/nebula/',
     // 一站式发布平台接口
-    SERVER_URL_ONESTOP: ORIGIN + '/synms/upm/',
-    // 一站式发布平台接口-多维监控.崩溃日志
-    SERVER_URL_MONITOR: ORIGIN + '/synms/',
-    // 星云系统-内容发布接口域名
-    SERVER_URL_NEBULA_GW: ORIGIN + '/nebula-gw/',
+    // 三翼鸟接口域名
+    // 内容发布平台-智家
+    SERVER_URL: protocol + '//zj-yanshou.haier.net/',
+
+    /*----------- 东南亚 ----------*/
+    // 东南亚接口域名
+    SERVER_URL_SCORD: 'https://uhome-sea.haieriot.net/',
+
+    /*----------- 星云系统 ----------*/
+    // 星云系统接口域名
+    SERVER_URL_NEBULA: protocol + '//zj-yanshou.haier.net/',
+
+    /*----------- 内容发布 ----------*/
+    // 内容发布平台接口-三翼鸟
+    CON_SYN_SERVER_URL: protocol + '//syntest.haier.net',
+
+    /*----------- 中台 ----------*/
     // 中台-搜索
-    SERVER_URL_MPS_GW: ORIGIN +  '/mps-gw/',
-    // 崩溃日志接口地址
-    SERVER_URL_PERFA: ORIGIN +  '/synms/synlog/crash/',
+    SERVER_URL_MPS: protocol + '//zj-yanshou.haier.net/',
   },
 };
