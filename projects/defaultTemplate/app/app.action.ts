@@ -129,7 +129,7 @@ export class ViewAction {
       default:
         return null;
     }
-    URL = environment.paths.SERVER_URL_MPS_GW + PARAM_URL;
+    URL = environment.paths.SERVER_URL_MPS + PARAM_URL;
     return this.httpSend({
       name,
       type: TYPE,
@@ -174,7 +174,7 @@ export class ViewAction {
       default:
         return null;
     }
-    URL = environment.paths.SERVER_URL_MPS_GW + PARAM_URL;
+    URL = environment.paths.SERVER_URL_MPS + PARAM_URL;
     return this.httpSend({
       name,
       method: METHOD,

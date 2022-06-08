@@ -104,13 +104,13 @@ export class tokenGuard implements CanActivate {
     // SERVER_URL_MPS_GW  星海
     switch (urlParam['resource']) {
       case 'promotion':
-        URL = environment.paths.SERVER_URL_NO_GATEWAY + 'promotion/sys/user/getMpsToken';
+        URL = environment.paths.SERVER_URL + 'promotion/sys/user/getMpsToken';
         break;
       case 'nebula':
         URL = environment.paths.SERVER_URL_NEBULA + PARAM_URL;
         break;
       case 'midbus':
-        URL = environment.paths.SERVER_URL_MPS_GW + PARAM_URL;
+        URL = environment.paths.SERVER_URL_MPS + PARAM_URL;
         break;
       default:
         break;

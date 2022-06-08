@@ -421,9 +421,9 @@ export class FroalaEditorComponent implements OnInit, OnDestroy {
       };
     } else {
       this.UPLOAD_URL = {
-        image: (environment.origin ? environment.paths.SERVER_URL_SYN + 'plugins/syn/' : environment.paths.SERVER_URL + 'plugins/') + 'fileUpload/pictureUpload',
-        video: (environment.origin ? environment.paths.SERVER_URL_SYN + 'plugins/syn/' : environment.paths.SERVER_URL + 'plugins/') + 'fileUpload/videoUpload',
-        files: (environment.origin ? environment.paths.SERVER_URL_SYN + 'plugins/syn/' : environment.paths.SERVER_URL + 'plugins/') + 'fileUpload/docUpload',
+        image: (environment.origin ? environment.paths.SERVER_URL + 'plugins/syn/' : environment.paths.SERVER_URL + 'plugins/') + 'fileUpload/pictureUpload',
+        video: (environment.origin ? environment.paths.SERVER_URL + 'plugins/syn/' : environment.paths.SERVER_URL + 'plugins/') + 'fileUpload/videoUpload',
+        files: (environment.origin ? environment.paths.SERVER_URL + 'plugins/syn/' : environment.paths.SERVER_URL + 'plugins/') + 'fileUpload/docUpload',
       };
     }
   }

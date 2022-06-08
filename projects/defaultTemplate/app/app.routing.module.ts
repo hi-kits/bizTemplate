@@ -52,7 +52,7 @@ const routes: Routes = [
   {
     path: 'noPermission', 
     data: { title: _AppParam.info.title },
-    loadChildren: () => import('./view/app.noPermission.module').then(m => m.ViewModule)
+    loadChildren: () => import('shared/noPermission/app.noPermission.module').then(m => m.ViewModule)
   },
   // 错误路由重定向[写在最后一个]
   { 

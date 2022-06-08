@@ -151,12 +151,12 @@ export class ValidatorAction {
       // 一站式1474013365585944577 1463083345787068418
       //  paramUrl = 'syn/event/analyse/sys/permission/getMenuButton?id=1474013365585944577'; // 参数url
       paramUrl = 'syn/event/analyse/sys/permission/getMenuButton'; // 参数url
-      url = environment.paths.SERVER_URL_NO_GATEWAY + paramUrl;
+      url = environment.paths.SERVER_URL + paramUrl;
       httpBody = { id: urlParam['menuId'] || '' };
     }  else {
       // 智家运营后台
       paramUrl =  'promotion/sys/permission/getMenuButton';
-      url = environment.paths.SERVER_URL_NO_GATEWAY + paramUrl;
+      url = environment.paths.SERVER_URL + paramUrl;
       httpBody = { id: urlParam['menuId'] || '' };
     }
     return this.httpServices.HTTP({

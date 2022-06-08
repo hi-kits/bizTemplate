@@ -13,22 +13,12 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // 路由相关模块
 import { RouterModule, Routes } from '@angular/router';
-// 公共模块
-import { COMMONMODILES } from '../../commonModule/commonModule.module';
-
-
-import { ViewAction } from '../app.action';
 
 /* -------------------------- 页面组件 --------------------------*/
 // tslint:disable-next-line: align
-/* 首页 */ import { APPIndexComponent } from './index/app.index.component';
-// tslint:disable-next-line: align
-/* 查询 */
-import { APPLookupComponent } from './_lookup/app.lookup.component';
-const Component = [
-  APPIndexComponent,
-  APPLookupComponent,
-];
+import { APPnoPermission } from './app.noPermission.component';
+
+const Component = [APPnoPermission];
 
 /*定义路由const表示不可改变*/
 const viewRoutes: Routes = [
@@ -38,23 +28,17 @@ const viewRoutes: Routes = [
   // children是嵌套组件的包含层
   {
     path: 'index',
-    component: APPIndexComponent,
-    
-    children: [
-      { path: 'addEdit/:id', component: APPIndexComponent },
-      // { path: 'addRegion/:id', component: APPAddRegion },
-      // { path: 'extraAward', component: APPExtraAwardComponent },
-    ]
+    component: APPnoPermission,
   },
-  { path: '**', redirectTo: 'index', pathMatch: 'full' /* 必须要设置 */ }
+  { path: '**', redirectTo: 'index', pathMatch: 'full' /* 必须要设置 */ },
 ];
 @NgModule({
   // 本模块声明的组件模板需要的类所在的其它模块。
   imports: [RouterModule.forChild(viewRoutes)],
   // declarations 的子集，可用于其它模块的组件模板
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppViewRoutingModule { }
+export class AppViewRoutingModule {}
 
 @NgModule({
   // 本模块声明的组件模板需要的类所在的其它模块。
@@ -62,20 +46,17 @@ export class AppViewRoutingModule { }
     FormsModule,
     ReactiveFormsModule,
     // 公共模块
-    COMMONMODILES,
-    AppViewRoutingModule
+    AppViewRoutingModule,
   ],
   // 自定义html元素
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   // 声明本模块中拥有的视图类。Angular 有三种视图类：组件、指令和管道。
   declarations: [
     // 页面
-    ...Component
+    ...Component,
   ],
   // 服务的创建者，并加入到全局服务列表中，可用于应用任何部分。
-  providers: [
-    // 事件
-    ViewAction,
-  ]
+  providers: [],
+  exports: [APPnoPermission],
 })
-export class ViewModule { }
+export class ViewModule {}
