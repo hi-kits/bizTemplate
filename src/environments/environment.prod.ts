@@ -35,7 +35,7 @@ if (IS_YS) {
     SERVER_URL_NEBULA: protocol + '//zj-yanshou.haier.net/',
     /*----------- 内容发布 ----------*/
     // 内容发布平台接口-三翼鸟
-    CON_SYN_SERVER_URL: protocol + '//syntest.haier.net',
+    CON_SYN_SERVER_URL: protocol + '//syntest.haier.net/',
 
     /*----------- 中台 ----------*/
     // 中台-搜索
@@ -61,7 +61,7 @@ if (IS_YS) {
     CON_SYN_SERVER_URL: protocol + '//zj-pre-release.haier.net/',
     /*----------- 中台 ----------*/
     // 中台-搜索
-    SERVER_URL_MPS: protocol + '//mps.haiersmarthomes.com',
+    SERVER_URL_MPS: protocol + '//mps.haiersmarthomes.com/',
   };
 } else {
   paths = {
@@ -86,7 +86,7 @@ if (IS_YS) {
 
     /*----------- 中台 ----------*/
     // 中台-搜索
-    SERVER_URL_MPS: protocol + '//mps.haiersmarthomes.com',
+    SERVER_URL_MPS: protocol + '//mps.haiersmarthomes.com/',
   };
 }
 
