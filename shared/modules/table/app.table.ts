@@ -234,7 +234,7 @@ export class AppTableComponent  implements OnInit {
     }
   }
   get nzData(): Array<any> {
-    if (this._nzData.length === 0 && (this.nzTotal > this.nzPageSize) && (this.nzTotal / this.nzPageSize) <= (this.nzListIndex - 1)) {
+    if (this._nzData.length === 0 && (this.nzTotal >= this.nzPageSize) && (this.nzTotal / this.nzPageSize) <= (this.nzListIndex - 1)) {
       this.nzListIndex = (this.nzListIndex - 1);
       this.pageIndexChange();
     }
